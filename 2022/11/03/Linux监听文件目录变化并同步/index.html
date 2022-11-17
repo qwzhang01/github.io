@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Linux监听文件目录变化并同步 | Avin技术笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="大型高并发的CMS新闻网站为了访问性能以及SEO，一般采用页面静态化方案。     静态化方案指由一个服务将新的内容静态化为HTML文件，web服务器直接将静态HTML提供给浏览器，不经过数据库或内存计算。          页面静态化中，需要将新生成的HTML同步给分布式的服务器，此时会用到文件目录监听工具和同步工具。最常用的是rsync和inotifywait。inotifywait监">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux监听文件目录变化并同步">
+<meta property="og:url" content="https://qwzhang01.github.io/2022/11/03/Linux%E7%9B%91%E5%90%AC%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E5%8F%98%E5%8C%96%E5%B9%B6%E5%90%8C%E6%AD%A5/index.html">
+<meta property="og:site_name" content="Avin技术笔记">
+<meta property="og:description" content="大型高并发的CMS新闻网站为了访问性能以及SEO，一般采用页面静态化方案。     静态化方案指由一个服务将新的内容静态化为HTML文件，web服务器直接将静态HTML提供给浏览器，不经过数据库或内存计算。          页面静态化中，需要将新生成的HTML同步给分布式的服务器，此时会用到文件目录监听工具和同步工具。最常用的是rsync和inotifywait。inotifywait监">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-11-03T02:53:25.000Z">
+<meta property="article:modified_time" content="2022-11-03T04:00:00.870Z">
+<meta property="article:author" content="Avin Zhang">
+<meta property="article:tag" content="工具使用笔记">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Avin技术笔记" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Avin技术笔记</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Avin技术笔记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Linux监听文件目录变化并同步" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/03/Linux%E7%9B%91%E5%90%AC%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E5%8F%98%E5%8C%96%E5%B9%B6%E5%90%8C%E6%AD%A5/" class="article-date">
+  <time class="dt-published" datetime="2022-11-03T02:53:25.000Z" itemprop="datePublished">2022-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Linux监听文件目录变化并同步
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>    大型高并发的CMS新闻网站为了访问性能以及SEO，一般采用页面静态化方案。</p>
+<p>    静态化方案指由一个服务将新的内容静态化为HTML文件，web服务器直接将静态HTML提供给浏览器，不经过数据库或内存计算。</p>
+<p>    </p>
+<p>    页面静态化中，需要将新生成的HTML同步给分布式的服务器，此时会用到文件目录监听工具和同步工具。最常用的是rsync和inotifywait。inotifywait监控文件夹变化；rsync同步变化的文件内容，可同步到本机的其他目录或者远程服务器上。</p>
+<h4 id="安装-rsync"><a href="#安装-rsync" class="headerlink" title="安装 rsync"></a>安装 rsync</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://rsync.samba.org/ftp/rsync/src/rsync-3.1.1.tar.gz</span><br><span class="line">tar zxvf rsync-3.1.1.tar.gz </span><br><span class="line">./configure –prefix=/usr/local/rsync-3.1.1</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="安装-inotifywait"><a href="#安装-inotifywait" class="headerlink" title="安装 inotifywait"></a>安装 inotifywait</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget http://github.com/downloads/rvoicilas/inotify-tools/inotify-tools-3.14.tar.gz</span><br><span class="line">tar zxvf inotify-tools-3.14.tar.gz</span><br><span class="line">cd inotify-tools-3.14</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="创建并运行脚本"><a href="#创建并运行脚本" class="headerlink" title="创建并运行脚本"></a>创建并运行脚本</h4><p>    新建脚本 inotifywait.sh</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">监控的路径</span></span><br><span class="line">export CNROMS_SRC=/home/ftpuser/gri/</span><br><span class="line">inotifywait --exclude &#x27;\.(part|swp)&#x27; -r -mq -e  modify,move_self,create,delete,move,close_write $CNROMS_SRC |</span><br><span class="line">  while read event;</span><br><span class="line">    do</span><br><span class="line">    rsync -vazu --progress  --password-file=/etc/rsyncd_rsync.secret  /home/ftpuser/gri/sla  rsync@10.208.1.1::gri ##这里执行同步的命令，可以改为其他的命令</span><br><span class="line"></span><br><span class="line">  done</span><br></pre></td></tr></table></figure>
+
+<p>    启动脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup sh inotifywait.sh &gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qwzhang01.github.io/2022/11/03/Linux%E7%9B%91%E5%90%AC%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E5%8F%98%E5%8C%96%E5%B9%B6%E5%90%8C%E6%AD%A5/" data-id="clal29d110001fsyt3ydr7hce" data-title="Linux监听文件目录变化并同步" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" rel="tag">工具使用笔记</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          大型网站页面静态化方案
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/11/23/%E6%8C%87%E6%95%B0%E5%AF%B9%E6%95%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">指数对数</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" rel="tag">Java基础代码示例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">Java并发编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" rel="tag">工具使用笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9E%8E%E7%8E%A9/" rel="tag">瞎玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" style="font-size: 10px;">Java基础代码示例</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" style="font-size: 13.33px;">Java并发编程</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" style="font-size: 13.33px;">工具使用笔记</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E7%9E%8E%E7%8E%A9/" style="font-size: 10px;">瞎玩</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 13.33px;">系统架构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 16.67px;">设计模式</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 10px;">题解</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/11/17/%E6%8E%92%E5%BA%8F-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">排序-选择排序</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/17/%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">排序-冒泡排序</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/09/%E5%B0%B1%E6%98%AF%E7%8E%A9/">就是玩</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/08/%E5%93%88%E5%B8%8C%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/">哈希表中的算法</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/08/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/">环形链表Ⅱ题解笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Avin Zhang<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
