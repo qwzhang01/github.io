@@ -13,15 +13,12 @@
 <meta property="og:site_name" content="Avin技术笔记">
 <meta property="og:description" content="题目描述给定一个链表的头节点  head ，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。 如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。如果 pos 是 -1，则在该链表中没有环。注意：pos 不作为参数进行传递，仅仅是为了标识链表的实际">
 <meta property="og:locale">
-<meta property="og:image" content="https://qwzhang01.github.io/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0%5C1.png">
-<meta property="og:image" content="https://qwzhang01.github.io/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0%5C2.gif">
 <meta property="article:published_time" content="2022-11-08T09:04:32.000Z">
-<meta property="article:modified_time" content="2022-11-17T12:16:21.668Z">
+<meta property="article:modified_time" content="2022-11-17T12:47:17.037Z">
 <meta property="article:author" content="Avin Zhang">
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="题解">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://qwzhang01.github.io/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0%5C1.png">
   
     <link rel="alternate" href="/atom.xml" title="Avin技术笔记" type="application/atom+xml">
   
@@ -108,23 +105,11 @@
 <p>如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。如果 pos 是 -1，则在该链表中没有环。注意：pos 不作为参数进行传递，仅仅是为了标识链表的实际情况。</p>
 <p><strong>不允许修改 链表。</strong></p>
 <p><strong>示例</strong></p>
-<p><img src="/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0%5C1.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [3,2,0,-4], pos = 1</span><br><span class="line">输出：返回索引为 1 的链表节点</span><br><span class="line">解释：链表中有一个环，其尾部连接到第二个节点。</span><br></pre></td></tr></table></figure>
-
-<h5 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h5><p>    快慢指针，快指针一次移动2个，满慢指针一次移动1个，如果不是循环链表，则快指针的next会等于null。</p>
-<p>    当快指针和慢指针相遇后，慢指针指向头部，快指针在相遇处，快慢指针同时每次移动1个，相遇的节点即为环形节点的入口。</p>
-<h5 id="推理"><a href="#推理" class="headerlink" title="推理"></a>推理</h5><p>    开头至入口的节点数&#x3D;x，入口到相遇的节点数&#x3D;y，相遇到入口的节点数&#x3D;z</p>
-<p>    （x + y）* 2 &#x3D; x + y + n * (y + z)</p>
-<p>    x + y &#x3D; n * ( y + z)</p>
-<p>    x &#x3D; (n - 1)(y + z) + z    </p>
-<p>    根据等式，一个指针从相遇节点快出发，一个指针从头结点出发，在相遇节点出发的指针，一定通过循环(n - 1)圈以及z个节点的情况下，再次与头结点相遇。</p>
-<p><img src="/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0%5C2.gif"></p>
-<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123;</span></span><br><span class="line"><span class="comment"> *         val = x;</span></span><br><span class="line"><span class="comment"> *         next = null;</span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">detectCycle</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="literal">null</span> || head.next == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">fast</span> <span class="operator">=</span> head.next.next;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">slow</span> <span class="operator">=</span> head.next;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(fast != <span class="literal">null</span> &amp;&amp; fast.next != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span>(fast == slow) &#123;</span><br><span class="line">                <span class="comment">// 第一次相遇</span></span><br><span class="line">                slow = head;</span><br><span class="line">                <span class="keyword">while</span>(slow != fast) &#123;</span><br><span class="line">                    slow = slow.next;</span><br><span class="line">                    fast = fast.next;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> slow;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                slow = slow.next;</span><br><span class="line">                fast = fast.next.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/08/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/" data-id="clal29d1i000lfsytclchdh0h" data-title="环形链表Ⅱ题解笔记" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/08/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/" data-id="clal2hzhh000lkoyt565hfs6c" data-title="环形链表Ⅱ题解笔记" class="article-share-link">Teilen</a>
       
       
       
