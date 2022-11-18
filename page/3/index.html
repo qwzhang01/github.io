@@ -66,10 +66,10 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
       </div>
     </div>
   </div>
@@ -77,6 +77,239 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-线程状态、切换、创建" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/09/13/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E3%80%81%E5%88%87%E6%8D%A2%E3%80%81%E5%88%9B%E5%BB%BA/" class="article-date">
+  <time class="dt-published" datetime="2021-09-13T02:41:58.000Z" itemprop="datePublished">2021-09-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/09/13/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E3%80%81%E5%88%87%E6%8D%A2%E3%80%81%E5%88%9B%E5%BB%BA/">线程状态、切换、创建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="线程状态、切换、创建"><a href="#线程状态、切换、创建" class="headerlink" title="线程状态、切换、创建"></a>线程状态、切换、创建</h3><ol>
+<li><p>线程状态</p>
+<ul>
+<li>New，新建</li>
+<li>Runnable，可运行状态</li>
+<li>Running，运行中</li>
+<li>Block，阻塞中。分为释放锁和不释放锁的阻塞</li>
+<li>Terminal，结束</li>
+</ul>
+</li>
+<li><p>线程切换 </p>
+<ul>
+<li>Thread 静态方法<ul>
+<li>sleep(), 当前线程停止，不释放锁。</li>
+<li>yield(), 当前线程让出CPU时间片进入可运行状态从新竞争获取CPU时间片</li>
+</ul>
+</li>
+<li>Thread对象方法<ul>
+<li>join(), 当前线程等待join()线程结束后再继续，不释放锁</li>
+</ul>
+</li>
+<li>Object方法<ul>
+<li>wait(), 等待并释放锁。</li>
+<li>notify(), notifyAll()，等待状态的线程重新进入Runable状态竞争CPU时间片。</li>
+<li>这几个方法需要在加锁的代码中执行，否则会异常。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>线程创建</p>
+<ul>
+<li>继承Thread</li>
+<li>实现Runnable</li>
+<li>实现Callable</li>
+<li>线程池</li>
+</ul>
+</li>
+</ol>
+<p>​    另附Java内存模型笔记<br>  <img src="http://assets.processon.com/chart_image/613ec0f11e08532eed69c0a0.png">  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qwzhang01.github.io/2021/09/13/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E3%80%81%E5%88%87%E6%8D%A2%E3%80%81%E5%88%9B%E5%BB%BA/" data-id="clalz8y8k000v2kyt8npc1k79" data-title="线程状态、切换、创建" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">Java并发编程</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-设计模式——准备：Solid设计原则、UML类图、设计模式分类" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/09/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%87%86%E5%A4%87%EF%BC%9ASolid%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E3%80%81UML%E7%B1%BB%E5%9B%BE%E3%80%81%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%88%86%E7%B1%BB/" class="article-date">
+  <time class="dt-published" datetime="2021-09-13T02:41:58.000Z" itemprop="datePublished">2021-09-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/09/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%87%86%E5%A4%87%EF%BC%9ASolid%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E3%80%81UML%E7%B1%BB%E5%9B%BE%E3%80%81%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%88%86%E7%B1%BB/">设计模式——准备：Solid设计原则、UML类图、设计模式分类</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="设计模式——准备：Solid设计原则、UML类图、设计模式分类"><a href="#设计模式——准备：Solid设计原则、UML类图、设计模式分类" class="headerlink" title="设计模式——准备：Solid设计原则、UML类图、设计模式分类"></a>设计模式——准备：Solid设计原则、UML类图、设计模式分类</h3><h3 id="1-导读"><a href="#1-导读" class="headerlink" title="1. 导读"></a>1. 导读</h3><p>设计模式是程序员进阶、面试无法躲避的内容，也是阅读源代码、提升代码质量最重要的内功。</p>
+<p>今天下决心好好学一遍设计模式，先做一些准备工作。</p>
+<ul>
+<li>记住Solid设计原则，设计原则略抽象，记住名字和含义，在后面学习中细品</li>
+<li>学会看UML类图，大部分设计模式的文章都会用UML类图展示设计模式，学会看UML类图有助于看懂别人的文章</li>
+<li>记住设计模式分类，以及每个类别下有哪些设计模式，厚的先读薄，脑海有目录和节奏</li>
+</ul>
+<h3 id="2-Solid设计原则"><a href="#2-Solid设计原则" class="headerlink" title="2. Solid设计原则"></a>2. Solid设计原则</h3><p><strong>1 .单一职责原则（Single Responsibility Principal）</strong></p>
+<p>​		一个类只包含单一职责，有且仅有一个原因使类发生变化。</p>
+<p><strong>2.开放封闭原则（Open-Closed Principal）</strong></p>
+<p>​		对扩展开放，对修改封闭。即可扩展，不可修改。需求变更后通过添加类而不是修改类实现。</p>
+<p><strong>3.里氏替换原则（Liskov Substitution Principal）</strong></p>
+<p>​		所有使用父类的地方，都可以使用子类替换。</p>
+<p><strong>4.接口隔离原则（Interface Segregation Principal）</strong></p>
+<p>​		实现类不应该包含不需要但必须实现的方法。也就是接口功能要足够聚合。</p>
+<p><strong>5.依赖倒置原则</strong>（Dependency Inversion Principal）</p>
+<p>​		抽象不应该依赖细节，细节要依赖抽象，也就是要面向接口编程而不针对实现编程。</p>
+<p>看到这里的各位萌亲，就问你蒙不蒙圈（不蒙圈的应该是大神，左手出门不送），我反正蒙圈了，但大神还是建议我先记住Solid原则，学完23种设计再回来理解。他说“跟产品大大相爱相杀几年后再回来理解设计原则，一定会明白大神们总结的原则有多重要”。</p>
+<h3 id="3-UML类图"><a href="#3-UML类图" class="headerlink" title="3. UML类图"></a>3. UML类图</h3><p><strong>3.1 类</strong></p>
+<p>由类名、属性、操作组成</p>
+<p><img src="/2021/09/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%87%86%E5%A4%87%EF%BC%9ASolid%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E3%80%81UML%E7%B1%BB%E5%9B%BE%E3%80%81%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%88%86%E7%B1%BB/image-20210720220458026.png"></p>
+<p><strong>3.1.1 类名</strong></p>
+<p>类的名字，如图中的Employee</p>
+<p><strong>3.1.2 属性</strong></p>
+<p>类的成员变量，格式</p>
+<blockquote>
+<p>可见性 名称：类型[&#x3D;默认值]</p>
+</blockquote>
+<p>可见性符号</p>
+<ul>
+<li>public: +</li>
+<li>private: -</li>
+<li>protected: #  </li>
+<li>package: ~</li>
+</ul>
+<p><strong>3.1.3 操作</strong></p>
+<p>类的方法，格式</p>
+<blockquote>
+<p>可见性 名称（参数列表）[:返回类型]</p>
+</blockquote>
+<p>可见性同属性</p>
+<p><strong>3.2 接口</strong></p>
+<p>接口由名字、操作组成，名字上部有&lt;<Interface>&gt;做标识符<br><img src="/2021/09/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%87%86%E5%A4%87%EF%BC%9ASolid%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E3%80%81UML%E7%B1%BB%E5%9B%BE%E3%80%81%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%88%86%E7%B1%BB/image-20210720221650630.png"></Interface></p>
+<p><strong>3.3 关系</strong></p>
+<ul>
+<li>关联：成员变量<ul>
+<li>双向关联：直线</li>
+<li>单向关联：直线+箭头</li>
+<li>自关联：直线+箭头</li>
+</ul>
+</li>
+<li>继承：继承抽象类，空心三角形+直线表示 </li>
+<li>泛华：继承非抽象类，空心三角形+直线表示 </li>
+<li>实现：实现接口，空心三角形+虚线表示</li>
+<li>聚合：成员变量，不是强依赖（部门与员工），空心菱形箭头+直线表示</li>
+<li>组合：成员变量，强依赖（公司与部门），实心菱形箭头+直线表示</li>
+<li>依赖：构造函数、方法入参。</li>
+</ul>
+<h3 id="4-时序图"><a href="#4-时序图" class="headerlink" title="4. 时序图"></a>4. 时序图</h3><ul>
+<li><p>时序图（Sequence Diagram）按照时间顺序显示对象之间交互，包括角色（Actor）、对象（Object）、生命线（Lifeline）、控制焦点（Focus of control）、消息（Message）</p>
+</li>
+<li><p>角色（Actor）</p>
+</li>
+<li><p>对象：对象名+类名</p>
+</li>
+<li><p>生命线：对象向下延伸的虚线</p>
+</li>
+<li><p>控制焦点：生命线上的矩形，执行操作</p>
+</li>
+<li><p>消息：</p>
+<p>同步消息，实线+实心箭头</p>
+<p>异步消息，实线+箭头</p>
+<p>返回消息，虚线+箭头</p>
+</li>
+<li><p>自关联消息，对象内部方法调用</p>
+</li>
+<li><p>Combined Fragments</p>
+</li>
+</ul>
+<p>  Alternative fragment（denoted “alt”） 与 if…then…else对应<br>  Option fragment (denoted “opt”) 与 Switch对应<br>  Parallel fragment (denoted “par”) 表示同时发生<br>  Loop fragment(denoted “loop”) 与 for 或者 Foreach对应</p>
+<h3 id="5-设计模式分类"><a href="#5-设计模式分类" class="headerlink" title="5. 设计模式分类"></a>5. 设计模式分类</h3><ul>
+<li>创建型<ul>
+<li>单例</li>
+<li>工厂方法</li>
+<li>抽象工厂</li>
+<li>建造者</li>
+<li>原型</li>
+</ul>
+</li>
+<li>结构型<ul>
+<li>适配器</li>
+<li>桥接</li>
+<li>装饰器</li>
+<li>组合</li>
+<li>外观</li>
+<li>享元</li>
+<li>代理</li>
+</ul>
+</li>
+<li>行为型<ul>
+<li>模版方法</li>
+<li>命令</li>
+<li>迭代器</li>
+<li>观察者</li>
+<li>中介者</li>
+<li>备忘录</li>
+<li>解释器</li>
+<li>状态</li>
+<li>策略</li>
+<li>职责链</li>
+<li>访问者</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qwzhang01.github.io/2021/09/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%87%86%E5%A4%87%EF%BC%9ASolid%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E3%80%81UML%E7%B1%BB%E5%9B%BE%E3%80%81%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%88%86%E7%B1%BB/" data-id="clalz8y8u001h2kytbch8aqjj" data-title="设计模式——准备：Solid设计原则、UML类图、设计模式分类" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-设计模式——单例" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
@@ -171,7 +404,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/09/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%8D%95%E4%BE%8B/" data-id="clal2q2jm001gqwytcrk3bbs5" data-title="设计模式——单例" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2021/09/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%8D%95%E4%BE%8B/" data-id="clalz8y8v001i2kytbnexc6qu" data-title="设计模式——单例" class="article-share-link">Share</a>
       
       
       
@@ -189,7 +422,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; zurück</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
   </nav>
 
 </section>
@@ -220,7 +453,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
     </div>
@@ -230,9 +463,17 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6n%E7%9A%842%E6%AC%A1%E6%96%B9%E6%B1%87%E6%80%BB/">排序-时间复杂度n的2次方汇总</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">排序-插入排序</a>
+          </li>
         
           <li>
             <a href="/2022/11/17/%E6%8E%92%E5%BA%8F-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">排序-选择排序</a>
@@ -244,14 +485,6 @@
         
           <li>
             <a href="/2022/11/09/%E5%B0%B1%E6%98%AF%E7%8E%A9/">就是玩</a>
-          </li>
-        
-          <li>
-            <a href="/2022/11/08/%E5%93%88%E5%B8%8C%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/">哈希表中的算法</a>
-          </li>
-        
-          <li>
-            <a href="/2022/11/08/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/">环形链表Ⅱ题解笔记</a>
           </li>
         
       </ul>

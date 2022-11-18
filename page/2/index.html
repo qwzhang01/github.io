@@ -66,10 +66,10 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
       </div>
     </div>
   </div>
@@ -77,6 +77,152 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-大型网站页面静态化方案" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/" class="article-date">
+  <time class="dt-published" datetime="2022-11-03T04:15:15.000Z" itemprop="datePublished">2022-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/">大型网站页面静态化方案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h5 id="为什么要静态化"><a href="#为什么要静态化" class="headerlink" title="为什么要静态化"></a>为什么要静态化</h5><ul>
+<li>提高访问性能</li>
+<li>SEO优化友好</li>
+</ul>
+<h5 id="方案一：网页HTML化"><a href="#方案一：网页HTML化" class="headerlink" title="方案一：网页HTML化"></a>方案一：网页HTML化</h5><p><img src="/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/%E5%9B%BE1.jpg"></p>
+<ul>
+<li>管理后台调用新闻服务创建文章成功后，发送消息到消息队列</li>
+<li>静态服务监听消息，把文章静态化，即生成html文件</li>
+<li>在静态服务器上面安装一个文件同步工具，此工具的功能可以做到只同步有变动的文件，做增量同步，rsync和inotifywait</li>
+<li>通过同步工具把html文件同步到所有的web服务器</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li><p>页面无法修改</p>
+</li>
+<li><p>页面同步实时性不好，多台服务器不一定同时同步，负载均衡下刷新页面可能有是有内容有时又没有了</p>
+</li>
+<li><p>html文件太多，无法维护</p>
+</li>
+<li><p>同步工具不稳定</p>
+</li>
+</ul>
+<h5 id="方案二：伪静态化"><a href="#方案二：伪静态化" class="headerlink" title="方案二：伪静态化"></a>方案二：伪静态化</h5><p><img src="/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/%E6%A1%88%E5%9B%BE2.jpg"></p>
+<ul>
+<li><p>管理后台调用新闻服务创建文章成功后，发送消息到消息队列</p>
+</li>
+<li><p>缓存服务监听消息，把文章内容缓存到缓存服务器上面</p>
+</li>
+<li><p>用户发起请求，web服务器根据id，直接查询缓存服务器</p>
+</li>
+<li><p>获取数据返回给用户</p>
+</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li><p>缓存压力大</p>
+</li>
+<li><p>缓存维护难度大</p>
+</li>
+</ul>
+<h5 id="方案三：布局样式模板化"><a href="#方案三：布局样式模板化" class="headerlink" title="方案三：布局样式模板化"></a>方案三：布局样式模板化</h5><p><img src="/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/%E5%9B%BE3.jpg"></p>
+<ul>
+<li><p>分发层做负载均衡，利用hash一致性进行分发</p>
+</li>
+<li><p>应用层利用openresty+lua，使用html模板和nginx级的缓存</p>
+</li>
+<li><p>缓存层：jvm缓存+redis分布式缓存</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qwzhang01.github.io/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/" data-id="clalz8y8a00082kytfl0k66x9" data-title="大型网站页面静态化方案" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Linux监听文件目录变化并同步" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/03/Linux%E7%9B%91%E5%90%AC%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E5%8F%98%E5%8C%96%E5%B9%B6%E5%90%8C%E6%AD%A5/" class="article-date">
+  <time class="dt-published" datetime="2022-11-03T02:53:25.000Z" itemprop="datePublished">2022-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/11/03/Linux%E7%9B%91%E5%90%AC%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E5%8F%98%E5%8C%96%E5%B9%B6%E5%90%8C%E6%AD%A5/">Linux监听文件目录变化并同步</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>    大型高并发的CMS新闻网站为了访问性能以及SEO，一般采用页面静态化方案。</p>
+<p>    静态化方案指由一个服务将新的内容静态化为HTML文件，web服务器直接将静态HTML提供给浏览器，不经过数据库或内存计算。</p>
+<p>    </p>
+<p>    页面静态化中，需要将新生成的HTML同步给分布式的服务器，此时会用到文件目录监听工具和同步工具。最常用的是rsync和inotifywait。inotifywait监控文件夹变化；rsync同步变化的文件内容，可同步到本机的其他目录或者远程服务器上。</p>
+<h4 id="安装-rsync"><a href="#安装-rsync" class="headerlink" title="安装 rsync"></a>安装 rsync</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://rsync.samba.org/ftp/rsync/src/rsync-3.1.1.tar.gz</span><br><span class="line">tar zxvf rsync-3.1.1.tar.gz </span><br><span class="line">./configure –prefix=/usr/local/rsync-3.1.1</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="安装-inotifywait"><a href="#安装-inotifywait" class="headerlink" title="安装 inotifywait"></a>安装 inotifywait</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget http://github.com/downloads/rvoicilas/inotify-tools/inotify-tools-3.14.tar.gz</span><br><span class="line">tar zxvf inotify-tools-3.14.tar.gz</span><br><span class="line">cd inotify-tools-3.14</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="创建并运行脚本"><a href="#创建并运行脚本" class="headerlink" title="创建并运行脚本"></a>创建并运行脚本</h4><p>    新建脚本 inotifywait.sh</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">监控的路径</span></span><br><span class="line">export CNROMS_SRC=/home/ftpuser/gri/</span><br><span class="line">inotifywait --exclude &#x27;\.(part|swp)&#x27; -r -mq -e  modify,move_self,create,delete,move,close_write $CNROMS_SRC |</span><br><span class="line">  while read event;</span><br><span class="line">    do</span><br><span class="line">    rsync -vazu --progress  --password-file=/etc/rsyncd_rsync.secret  /home/ftpuser/gri/sla  rsync@10.208.1.1::gri ##这里执行同步的命令，可以改为其他的命令</span><br><span class="line"></span><br><span class="line">  done</span><br></pre></td></tr></table></figure>
+
+<p>    启动脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup sh inotifywait.sh &gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qwzhang01.github.io/2022/11/03/Linux%E7%9B%91%E5%90%AC%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E5%8F%98%E5%8C%96%E5%B9%B6%E5%90%8C%E6%AD%A5/" data-id="clalz8y8400012kytcolb22f0" data-title="Linux监听文件目录变化并同步" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" rel="tag">工具使用笔记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-指数对数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
@@ -121,7 +267,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/11/23/%E6%8C%87%E6%95%B0%E5%AF%B9%E6%95%B0/" data-id="clal2q2j5000cqwytdfohdw18" data-title="指数对数" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2021/11/23/%E6%8C%87%E6%95%B0%E5%AF%B9%E6%95%B0/" data-id="clalz8y8c000c2kyt1l20agk1" data-title="指数对数" class="article-share-link">Share</a>
       
       
       
@@ -162,7 +308,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/11/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/" data-id="clal2q2j9000hqwyt1aorency" data-title="数据结构与算法学习路径" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2021/11/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/" data-id="clalz8y8h000l2kytbc4ucqqw" data-title="数据结构与算法学习路径" class="article-share-link">Share</a>
       
       
       
@@ -258,7 +404,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/11/12/%E9%A1%B9%E7%9B%AE%E5%85%B3%E9%94%AE%E8%8A%82%E7%82%B9%E5%BA%94%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88/" data-id="clal2q2jo001jqwyt06n9b9lw" data-title="项目关键节点应该做什么" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2021/11/12/%E9%A1%B9%E7%9B%AE%E5%85%B3%E9%94%AE%E8%8A%82%E7%82%B9%E5%BA%94%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88/" data-id="clalz8y8w001m2kyt3ao488sp" data-title="项目关键节点应该做什么" class="article-share-link">Share</a>
       
       
       
@@ -307,7 +453,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/10/19/Hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="clal2q2is0000qwyt0lv7e8ay" data-title="Hexo常用命令" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2021/10/19/Hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="clalz8y8000002kyt536g1qcs" data-title="Hexo常用命令" class="article-share-link">Share</a>
       
       
       
@@ -383,7 +529,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/10/19/%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%8F%98%E9%87%8FThreadLocal/" data-id="clal2q2jc000oqwyt6i5cfp4p" data-title="线程本地变量ThreadLocal" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2021/10/19/%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%8F%98%E9%87%8FThreadLocal/" data-id="clalz8y8k000t2kyt8dyc639w" data-title="线程本地变量ThreadLocal" class="article-share-link">Share</a>
       
       
       
@@ -436,7 +582,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/09/28/Proxy%E4%BB%A3%E7%90%86%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" data-id="clal2q2j00003qwytb7z1b10q" data-title="Proxy代理代码示例" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2021/09/28/Proxy%E4%BB%A3%E7%90%86%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" data-id="clalz8y8700042kythi6i4myy" data-title="Proxy代理代码示例" class="article-share-link">Share</a>
       
       
       
@@ -484,7 +630,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/09/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E5%99%A8/" data-id="clal2q2jf000uqwyte5f80hsu" data-title="设计模式-装饰器" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2021/09/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E5%99%A8/" data-id="clalz8y8m00102kytgjw6cfcb" data-title="设计模式-装饰器" class="article-share-link">Share</a>
       
       
       
@@ -549,240 +695,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/09/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%B7%A5%E5%8E%82/" data-id="clal2q2je000sqwytgxvn4xb5" data-title="设计模式-工厂" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-线程状态、切换、创建" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/09/13/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E3%80%81%E5%88%87%E6%8D%A2%E3%80%81%E5%88%9B%E5%BB%BA/" class="article-date">
-  <time class="dt-published" datetime="2021-09-13T02:41:58.000Z" itemprop="datePublished">2021-09-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/09/13/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E3%80%81%E5%88%87%E6%8D%A2%E3%80%81%E5%88%9B%E5%BB%BA/">线程状态、切换、创建</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="线程状态、切换、创建"><a href="#线程状态、切换、创建" class="headerlink" title="线程状态、切换、创建"></a>线程状态、切换、创建</h3><ol>
-<li><p>线程状态</p>
-<ul>
-<li>New，新建</li>
-<li>Runnable，可运行状态</li>
-<li>Running，运行中</li>
-<li>Block，阻塞中。分为释放锁和不释放锁的阻塞</li>
-<li>Terminal，结束</li>
-</ul>
-</li>
-<li><p>线程切换 </p>
-<ul>
-<li>Thread 静态方法<ul>
-<li>sleep(), 当前线程停止，不释放锁。</li>
-<li>yield(), 当前线程让出CPU时间片进入可运行状态从新竞争获取CPU时间片</li>
-</ul>
-</li>
-<li>Thread对象方法<ul>
-<li>join(), 当前线程等待join()线程结束后再继续，不释放锁</li>
-</ul>
-</li>
-<li>Object方法<ul>
-<li>wait(), 等待并释放锁。</li>
-<li>notify(), notifyAll()，等待状态的线程重新进入Runable状态竞争CPU时间片。</li>
-<li>这几个方法需要在加锁的代码中执行，否则会异常。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>线程创建</p>
-<ul>
-<li>继承Thread</li>
-<li>实现Runnable</li>
-<li>实现Callable</li>
-<li>线程池</li>
-</ul>
-</li>
-</ol>
-<p>​    另附Java内存模型笔记<br>  <img src="http://assets.processon.com/chart_image/613ec0f11e08532eed69c0a0.png">  </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/09/13/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E3%80%81%E5%88%87%E6%8D%A2%E3%80%81%E5%88%9B%E5%BB%BA/" data-id="clal2q2jd000qqwytfnho0wns" data-title="线程状态、切换、创建" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">Java并发编程</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-设计模式——准备：Solid设计原则、UML类图、设计模式分类" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/09/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%87%86%E5%A4%87%EF%BC%9ASolid%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E3%80%81UML%E7%B1%BB%E5%9B%BE%E3%80%81%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%88%86%E7%B1%BB/" class="article-date">
-  <time class="dt-published" datetime="2021-09-13T02:41:58.000Z" itemprop="datePublished">2021-09-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/09/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%87%86%E5%A4%87%EF%BC%9ASolid%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E3%80%81UML%E7%B1%BB%E5%9B%BE%E3%80%81%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%88%86%E7%B1%BB/">设计模式——准备：Solid设计原则、UML类图、设计模式分类</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="设计模式——准备：Solid设计原则、UML类图、设计模式分类"><a href="#设计模式——准备：Solid设计原则、UML类图、设计模式分类" class="headerlink" title="设计模式——准备：Solid设计原则、UML类图、设计模式分类"></a>设计模式——准备：Solid设计原则、UML类图、设计模式分类</h3><h3 id="1-导读"><a href="#1-导读" class="headerlink" title="1. 导读"></a>1. 导读</h3><p>设计模式是程序员进阶、面试无法躲避的内容，也是阅读源代码、提升代码质量最重要的内功。</p>
-<p>今天下决心好好学一遍设计模式，先做一些准备工作。</p>
-<ul>
-<li>记住Solid设计原则，设计原则略抽象，记住名字和含义，在后面学习中细品</li>
-<li>学会看UML类图，大部分设计模式的文章都会用UML类图展示设计模式，学会看UML类图有助于看懂别人的文章</li>
-<li>记住设计模式分类，以及每个类别下有哪些设计模式，厚的先读薄，脑海有目录和节奏</li>
-</ul>
-<h3 id="2-Solid设计原则"><a href="#2-Solid设计原则" class="headerlink" title="2. Solid设计原则"></a>2. Solid设计原则</h3><p><strong>1 .单一职责原则（Single Responsibility Principal）</strong></p>
-<p>​		一个类只包含单一职责，有且仅有一个原因使类发生变化。</p>
-<p><strong>2.开放封闭原则（Open-Closed Principal）</strong></p>
-<p>​		对扩展开放，对修改封闭。即可扩展，不可修改。需求变更后通过添加类而不是修改类实现。</p>
-<p><strong>3.里氏替换原则（Liskov Substitution Principal）</strong></p>
-<p>​		所有使用父类的地方，都可以使用子类替换。</p>
-<p><strong>4.接口隔离原则（Interface Segregation Principal）</strong></p>
-<p>​		实现类不应该包含不需要但必须实现的方法。也就是接口功能要足够聚合。</p>
-<p><strong>5.依赖倒置原则</strong>（Dependency Inversion Principal）</p>
-<p>​		抽象不应该依赖细节，细节要依赖抽象，也就是要面向接口编程而不针对实现编程。</p>
-<p>看到这里的各位萌亲，就问你蒙不蒙圈（不蒙圈的应该是大神，左手出门不送），我反正蒙圈了，但大神还是建议我先记住Solid原则，学完23种设计再回来理解。他说“跟产品大大相爱相杀几年后再回来理解设计原则，一定会明白大神们总结的原则有多重要”。</p>
-<h3 id="3-UML类图"><a href="#3-UML类图" class="headerlink" title="3. UML类图"></a>3. UML类图</h3><p><strong>3.1 类</strong></p>
-<p>由类名、属性、操作组成</p>
-<p><img src="/2021/09/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%87%86%E5%A4%87%EF%BC%9ASolid%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E3%80%81UML%E7%B1%BB%E5%9B%BE%E3%80%81%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%88%86%E7%B1%BB/image-20210720220458026.png"></p>
-<p><strong>3.1.1 类名</strong></p>
-<p>类的名字，如图中的Employee</p>
-<p><strong>3.1.2 属性</strong></p>
-<p>类的成员变量，格式</p>
-<blockquote>
-<p>可见性 名称：类型[&#x3D;默认值]</p>
-</blockquote>
-<p>可见性符号</p>
-<ul>
-<li>public: +</li>
-<li>private: -</li>
-<li>protected: #  </li>
-<li>package: ~</li>
-</ul>
-<p><strong>3.1.3 操作</strong></p>
-<p>类的方法，格式</p>
-<blockquote>
-<p>可见性 名称（参数列表）[:返回类型]</p>
-</blockquote>
-<p>可见性同属性</p>
-<p><strong>3.2 接口</strong></p>
-<p>接口由名字、操作组成，名字上部有&lt;<Interface>&gt;做标识符<br><img src="/2021/09/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%87%86%E5%A4%87%EF%BC%9ASolid%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E3%80%81UML%E7%B1%BB%E5%9B%BE%E3%80%81%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%88%86%E7%B1%BB/image-20210720221650630.png"></Interface></p>
-<p><strong>3.3 关系</strong></p>
-<ul>
-<li>关联：成员变量<ul>
-<li>双向关联：直线</li>
-<li>单向关联：直线+箭头</li>
-<li>自关联：直线+箭头</li>
-</ul>
-</li>
-<li>继承：继承抽象类，空心三角形+直线表示 </li>
-<li>泛华：继承非抽象类，空心三角形+直线表示 </li>
-<li>实现：实现接口，空心三角形+虚线表示</li>
-<li>聚合：成员变量，不是强依赖（部门与员工），空心菱形箭头+直线表示</li>
-<li>组合：成员变量，强依赖（公司与部门），实心菱形箭头+直线表示</li>
-<li>依赖：构造函数、方法入参。</li>
-</ul>
-<h3 id="4-时序图"><a href="#4-时序图" class="headerlink" title="4. 时序图"></a>4. 时序图</h3><ul>
-<li><p>时序图（Sequence Diagram）按照时间顺序显示对象之间交互，包括角色（Actor）、对象（Object）、生命线（Lifeline）、控制焦点（Focus of control）、消息（Message）</p>
-</li>
-<li><p>角色（Actor）</p>
-</li>
-<li><p>对象：对象名+类名</p>
-</li>
-<li><p>生命线：对象向下延伸的虚线</p>
-</li>
-<li><p>控制焦点：生命线上的矩形，执行操作</p>
-</li>
-<li><p>消息：</p>
-<p>同步消息，实线+实心箭头</p>
-<p>异步消息，实线+箭头</p>
-<p>返回消息，虚线+箭头</p>
-</li>
-<li><p>自关联消息，对象内部方法调用</p>
-</li>
-<li><p>Combined Fragments</p>
-</li>
-</ul>
-<p>  Alternative fragment（denoted “alt”） 与 if…then…else对应<br>  Option fragment (denoted “opt”) 与 Switch对应<br>  Parallel fragment (denoted “par”) 表示同时发生<br>  Loop fragment(denoted “loop”) 与 for 或者 Foreach对应</p>
-<h3 id="5-设计模式分类"><a href="#5-设计模式分类" class="headerlink" title="5. 设计模式分类"></a>5. 设计模式分类</h3><ul>
-<li>创建型<ul>
-<li>单例</li>
-<li>工厂方法</li>
-<li>抽象工厂</li>
-<li>建造者</li>
-<li>原型</li>
-</ul>
-</li>
-<li>结构型<ul>
-<li>适配器</li>
-<li>桥接</li>
-<li>装饰器</li>
-<li>组合</li>
-<li>外观</li>
-<li>享元</li>
-<li>代理</li>
-</ul>
-</li>
-<li>行为型<ul>
-<li>模版方法</li>
-<li>命令</li>
-<li>迭代器</li>
-<li>观察者</li>
-<li>中介者</li>
-<li>备忘录</li>
-<li>解释器</li>
-<li>状态</li>
-<li>策略</li>
-<li>职责链</li>
-<li>访问者</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/09/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E5%87%86%E5%A4%87%EF%BC%9ASolid%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E3%80%81UML%E7%B1%BB%E5%9B%BE%E3%80%81%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%88%86%E7%B1%BB/" data-id="clal2q2jf000vqwyt9c0hbm0z" data-title="设计模式——准备：Solid设计原则、UML类图、设计模式分类" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2021/09/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%B7%A5%E5%8E%82/" data-id="clalz8y8l000x2kytb9dofpns" data-title="设计模式-工厂" class="article-share-link">Share</a>
       
       
       
@@ -800,7 +713,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">weiter &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -831,7 +744,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
     </div>
@@ -841,9 +754,17 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6n%E7%9A%842%E6%AC%A1%E6%96%B9%E6%B1%87%E6%80%BB/">排序-时间复杂度n的2次方汇总</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">排序-插入排序</a>
+          </li>
         
           <li>
             <a href="/2022/11/17/%E6%8E%92%E5%BA%8F-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">排序-选择排序</a>
@@ -855,14 +776,6 @@
         
           <li>
             <a href="/2022/11/09/%E5%B0%B1%E6%98%AF%E7%8E%A9/">就是玩</a>
-          </li>
-        
-          <li>
-            <a href="/2022/11/08/%E5%93%88%E5%B8%8C%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/">哈希表中的算法</a>
-          </li>
-        
-          <li>
-            <a href="/2022/11/08/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/">环形链表Ⅱ题解笔记</a>
           </li>
         
       </ul>
