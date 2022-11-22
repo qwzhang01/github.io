@@ -6,15 +6,15 @@
   
   <title>排序-快排 | Avin技术笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="快排平均时间复杂度O(nlogn)，平均空间复杂度O(logn)。效率和使用比较多的排序算法。">
+  <meta name="description" content="快排平均时间复杂度O(nlogn)，平均空间复杂度O(logn)。效率和使用比较多的排序算法。 快排基本思想 从数组取出一个数，叫基数（privot）  遍历数组，将数组中的数按照大于和小于基数，分布在基数的两边  将左右两个数组再次重复以上步骤，直到分成的子数组数量只要1个或2个   快排退出递归的边界 当某个区域只剩下一个数字或0个数字的时候就不需要排序了  start 存在 等于mi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="排序-快排">
 <meta property="og:url" content="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%BF%AB%E6%8E%92/index.html">
 <meta property="og:site_name" content="Avin技术笔记">
-<meta property="og:description" content="快排平均时间复杂度O(nlogn)，平均空间复杂度O(logn)。效率和使用比较多的排序算法。">
+<meta property="og:description" content="快排平均时间复杂度O(nlogn)，平均空间复杂度O(logn)。效率和使用比较多的排序算法。 快排基本思想 从数组取出一个数，叫基数（privot）  遍历数组，将数组中的数按照大于和小于基数，分布在基数的两边  将左右两个数组再次重复以上步骤，直到分成的子数组数量只要1个或2个   快排退出递归的边界 当某个区域只剩下一个数字或0个数字的时候就不需要排序了  start 存在 等于mi">
 <meta property="og:locale">
 <meta property="article:published_time" content="2022-11-22T09:50:39.000Z">
-<meta property="article:modified_time" content="2022-11-22T10:17:22.006Z">
+<meta property="article:modified_time" content="2022-11-22T12:10:56.963Z">
 <meta property="article:author" content="Avin Zhang">
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="排序">
@@ -69,10 +69,10 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
       </div>
     </div>
   </div>
@@ -102,11 +102,49 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <p>    快排平均时间复杂度O(nlogn)，平均空间复杂度O(logn)。效率和使用比较多的排序算法。</p>
+<h5 id="快排基本思想"><a href="#快排基本思想" class="headerlink" title="快排基本思想"></a>快排基本思想</h5><ul>
+<li><p>从数组取出一个数，叫基数（privot）</p>
+</li>
+<li><p>遍历数组，将数组中的数按照大于和小于基数，分布在基数的两边</p>
+</li>
+<li><p>将左右两个数组再次重复以上步骤，直到分成的子数组数量只要1个或2个</p>
+</li>
+</ul>
+<h5 id="快排退出递归的边界"><a href="#快排退出递归的边界" class="headerlink" title="快排退出递归的边界"></a>快排退出递归的边界</h5><ul>
+<li><p>当某个区域只剩下一个数字或0个数字的时候就不需要排序了</p>
+</li>
+<li><p>start 存在 等于middle，等于middle-1；end存在等于middle，等于end-1，则start &#x3D;&#x3D; end 或end+1 &#x3D; start情况下退出递归</p>
+</li>
+<li><p>进一步推理，start &gt;&#x3D; end 则退出递归，因为start正常情况下都小于end</p>
+</li>
+</ul>
+<h5 id="基数选择"><a href="#基数选择" class="headerlink" title="基数选择"></a>基数选择</h5><ul>
+<li><p>选择第一个做为基数</p>
+</li>
+<li><p>选择最后一个做为基数</p>
+</li>
+<li><p>随机选择基数，随机选择基数时间复杂度最优</p>
+</li>
+</ul>
+<h5 id="分区算法"><a href="#分区算法" class="headerlink" title="分区算法"></a>分区算法</h5><ul>
+<li><p>简单分区算法，从left开始，遇到比基数大的，则交换到数组最后并将right减1，直到left和right相遇，再将基数和中间的数交换，返回中间值的下标</p>
+</li>
+<li><p>双指针分区算法</p>
+</li>
+</ul>
+<h5 id="快排优化"><a href="#快排优化" class="headerlink" title="快排优化"></a>快排优化</h5><ul>
+<li><p>随机获取基数</p>
+</li>
+<li><p>防止数组正序或逆序，先将数组用洗牌算法打乱</p>
+</li>
+</ul>
+<h5 id="洗牌算法"><a href="#洗牌算法" class="headerlink" title="洗牌算法"></a>洗牌算法</h5><p>    每次从未处理的数据中，随机取一个数字，将其放入数字末尾。即JDK的Collections.shuffle()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">quickSort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%BF%AB%E6%8E%92/" data-id="clas2dbjo000hx4ytaqwbapp3" data-title="排序-快排" class="article-share-link">Share</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%BF%AB%E6%8E%92/" data-id="clas6ep5y000jo0yt8utt8gj9" data-title="排序-快排" class="article-share-link">Teilen</a>
       
       
       
@@ -120,7 +158,7 @@
   
   
     <a href="/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%A0%86%E6%8E%92%E5%BA%8F/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Älter</strong>
       <div class="article-nav-title">排序-堆排序</div>
     </a>
   
@@ -158,7 +196,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
     </div>
@@ -168,7 +206,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
         
