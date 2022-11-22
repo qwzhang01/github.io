@@ -64,12 +64,12 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Rechercher"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
       </div>
     </div>
   </div>
@@ -77,6 +77,62 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-环形链表Ⅱ题解笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/08/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time class="dt-published" datetime="2022-11-08T09:04:32.000Z" itemprop="datePublished">2022-11-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/11/08/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/">环形链表Ⅱ题解笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h5 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h5><p>给定一个链表的头节点  head ，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。</p>
+<p>如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。如果 pos 是 -1，则在该链表中没有环。注意：pos 不作为参数进行传递，仅仅是为了标识链表的实际情况。</p>
+<p><strong>不允许修改 链表。</strong></p>
+<p><strong>示例</strong></p>
+<p><img src="/2022/11/08/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/1.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [3,2,0,-4], pos = 1</span><br><span class="line">输出：返回索引为 1 的链表节点</span><br><span class="line">解释：链表中有一个环，其尾部连接到第二个节点。</span><br></pre></td></tr></table></figure>
+
+<h5 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h5><p>    快慢指针，快指针一次移动2个，满慢指针一次移动1个，如果不是循环链表，则快指针的next会等于null。</p>
+<p>    当快指针和慢指针相遇后，慢指针指向头部，快指针在相遇处，快慢指针同时每次移动1个，相遇的节点即为环形节点的入口。</p>
+<h5 id="推理"><a href="#推理" class="headerlink" title="推理"></a>推理</h5><p>    开头至入口的节点数&#x3D;x，入口到相遇的节点数&#x3D;y，相遇到入口的节点数&#x3D;z</p>
+<p>    （x + y）* 2 &#x3D; x + y + n * (y + z)</p>
+<p>    x + y &#x3D; n * ( y + z)</p>
+<p>    x &#x3D; (n - 1)(y + z) + z    </p>
+<p>    根据等式，一个指针从相遇节点快出发，一个指针从头结点出发，在相遇节点出发的指针，一定通过循环(n - 1)圈以及z个节点的情况下，再次与头结点相遇。</p>
+<p><img src="/2022/11/08/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/2.gif"></p>
+<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123;</span></span><br><span class="line"><span class="comment"> *         val = x;</span></span><br><span class="line"><span class="comment"> *         next = null;</span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">detectCycle</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="literal">null</span> || head.next == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">fast</span> <span class="operator">=</span> head.next.next;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">slow</span> <span class="operator">=</span> head.next;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(fast != <span class="literal">null</span> &amp;&amp; fast.next != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span>(fast == slow) &#123;</span><br><span class="line">                <span class="comment">// 第一次相遇</span></span><br><span class="line">                slow = head;</span><br><span class="line">                <span class="keyword">while</span>(slow != fast) &#123;</span><br><span class="line">                    slow = slow.next;</span><br><span class="line">                    fast = fast.next;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> slow;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                slow = slow.next;</span><br><span class="line">                fast = fast.next.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qwzhang01.github.io/2022/11/08/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/" data-id="clas2dbjv000xx4yteifohn8i" data-title="环形链表Ⅱ题解笔记" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-链表中的算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
@@ -137,7 +193,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/07/%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="clary8dc1001vhgytcvnb70gt" data-title="链表中的算法" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/07/%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="clas2dbk80027x4ytcqqgfgyr" data-title="链表中的算法" class="article-share-link">Share</a>
       
       
       
@@ -207,7 +263,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/04/%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="clary8dbl000vhgyt0f6tg4sq" data-title="数组中的算法" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/04/%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="clas2dbjt000tx4ytfj5gc2qk" data-title="数组中的算法" class="article-share-link">Share</a>
       
       
       
@@ -275,7 +331,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/03/%E4%B8%80%E8%87%B4%E6%80%A7hash%E7%AE%97%E6%B3%95/" data-id="clary8db80004hgyt325w5u4j" data-title="一致性hash算法" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/03/%E4%B8%80%E8%87%B4%E6%80%A7hash%E7%AE%97%E6%B3%95/" data-id="clas2dbjg0004x4ytbjwd2zxg" data-title="一致性hash算法" class="article-share-link">Share</a>
       
       
       
@@ -364,7 +420,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/" data-id="clary8dbb0008hgyt0pn81q1j" data-title="大型网站页面静态化方案" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/" data-id="clas2dbjh0005x4ytdpcn5evj" data-title="大型网站页面静态化方案" class="article-share-link">Share</a>
       
       
       
@@ -421,7 +477,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/03/Linux%E7%9B%91%E5%90%AC%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E5%8F%98%E5%8C%96%E5%B9%B6%E5%90%8C%E6%AD%A5/" data-id="clary8db50001hgytcjj7cbph" data-title="Linux监听文件目录变化并同步" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/03/Linux%E7%9B%91%E5%90%AC%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E5%8F%98%E5%8C%96%E5%B9%B6%E5%90%8C%E6%AD%A5/" data-id="clas2dbjd0001x4yt36vm6g2m" data-title="Linux监听文件目录变化并同步" class="article-share-link">Share</a>
       
       
       
@@ -478,7 +534,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/11/23/%E6%8C%87%E6%95%B0%E5%AF%B9%E6%95%B0/" data-id="clary8dbd000chgyt4dyeez13" data-title="指数对数" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2021/11/23/%E6%8C%87%E6%95%B0%E5%AF%B9%E6%95%B0/" data-id="clas2dbjl000cx4yt9gr2g6fm" data-title="指数对数" class="article-share-link">Share</a>
       
       
       
@@ -519,7 +575,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/11/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/" data-id="clary8dbl000thgyt57lzffbu" data-title="数据结构与算法学习路径" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2021/11/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/" data-id="clas2dbju000ux4ytfo66culu" data-title="数据结构与算法学习路径" class="article-share-link">Share</a>
       
       
       
@@ -615,7 +671,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/11/12/%E9%A1%B9%E7%9B%AE%E5%85%B3%E9%94%AE%E8%8A%82%E7%82%B9%E5%BA%94%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88/" data-id="clary8dby001thgytd8l3hoxu" data-title="项目关键节点应该做什么" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2021/11/12/%E9%A1%B9%E7%9B%AE%E5%85%B3%E9%94%AE%E8%8A%82%E7%82%B9%E5%BA%94%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88/" data-id="clas2dbkb002cx4yt3bj81ep7" data-title="项目关键节点应该做什么" class="article-share-link">Share</a>
       
       
       
@@ -664,7 +720,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/10/19/Hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="clary8db00000hgyt4lrg47e6" data-title="Hexo常用命令" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2021/10/19/Hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="clas2dbj80000x4yt1jrt79ck" data-title="Hexo常用命令" class="article-share-link">Share</a>
       
       
       
@@ -678,87 +734,11 @@
 
 
   
-    <article id="post-线程本地变量ThreadLocal" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/10/19/%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%8F%98%E9%87%8FThreadLocal/" class="article-date">
-  <time class="dt-published" datetime="2021-10-19T02:24:37.000Z" itemprop="datePublished">2021-10-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/10/19/%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%8F%98%E9%87%8FThreadLocal/">线程本地变量ThreadLocal</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h4 id="线程本地变量ThreadLocal"><a href="#线程本地变量ThreadLocal" class="headerlink" title="线程本地变量ThreadLocal"></a>线程本地变量ThreadLocal</h4><p>线程本地变量只能被本线程访问，不能被其他线程访问。</p>
-<h5 id="ThreadLocal相关核心类"><a href="#ThreadLocal相关核心类" class="headerlink" title="ThreadLocal相关核心类"></a>ThreadLocal相关核心类</h5><ul>
-<li><p>Thread，有两个属性threadLocals，inheritableThreadLocals，用来保存线程本地变量，threadLocals由ThreadLocal.class维护，inheritableThreadLocals由InheritableThreadLocal.class维护</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* ThreadLocal values pertaining to this thread. This map is maintained</span></span><br><span class="line"><span class="comment"> * by the ThreadLocal class. */</span></span><br><span class="line">ThreadLocal.<span class="type">ThreadLocalMap</span> <span class="variable">threadLocals</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * InheritableThreadLocal values pertaining to this thread. This map is</span></span><br><span class="line"><span class="comment"> * maintained by the InheritableThreadLocal class.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">ThreadLocal.<span class="type">ThreadLocalMap</span> <span class="variable">inheritableThreadLocals</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>ThreadLocal 保存线程本地变量的工具类</p>
-</li>
-<li><p>ThreadLocal.ThreadLocalMap，保存线程本地变量的容器，K是ThreadLocal实例化对象，值为变量值，保存形式是ThreadLocal.ThreadLocalMap.Entry数组，值在数组的下标由ThreadLocal实例化对象hash后获取</p>
-</li>
-<li><p>ThreadLocal.ThreadLocalMap.Entry，保存线程本地变量K-V的类，K是弱引用</p>
-</li>
-<li><p>WeakReference，弱引用， 当对象仅被弱引用指向，不被其他强引用指向，不论内存空间是否足够，GC都回收。</p>
-</li>
-</ul>
-<h5 id="常用ThreadLocal"><a href="#常用ThreadLocal" class="headerlink" title="常用ThreadLocal"></a>常用ThreadLocal</h5><ul>
-<li>ThreadLocal 操作线程本地变量</li>
-<li>InheritableThreadLocal  可以读取父线程以及本线程的变量</li>
-</ul>
-<h5 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h5><ul>
-<li>ThreadLocal可以跨线程使用吗</li>
-<li>ThreadLocal会内存泄漏吗</li>
-</ul>
-<h5 id="重要源码阅读"><a href="#重要源码阅读" class="headerlink" title="重要源码阅读"></a>重要源码阅读</h5><ul>
-<li>inheritableThreadLocals初始化</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Thread 类： 获取父线程</span></span><br><span class="line"><span class="type">Thread</span> <span class="variable">parent</span> <span class="operator">=</span> currentThread();</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果使用inheritThreadLocals 则根据父线程本地变量创建本地线程本地变量</span></span><br><span class="line"><span class="keyword">if</span> (inheritThreadLocals &amp;&amp; parent.inheritableThreadLocals != <span class="literal">null</span>)</span><br><span class="line">    <span class="built_in">this</span>.inheritableThreadLocals =</span><br><span class="line">        ThreadLocal.createInheritedMap(parent.inheritableThreadLocals);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ThreadLocal类： 创建ThreadLocalMap，从父线程把变量循环放入本地线程变量</span></span><br><span class="line"><span class="keyword">private</span> <span class="title function_">ThreadLocalMap</span><span class="params">(ThreadLocalMap parentMap)</span> &#123;</span><br><span class="line">    Entry[] parentTable = parentMap.table;</span><br><span class="line">    <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> parentTable.length;</span><br><span class="line">    setThreshold(len);</span><br><span class="line">    table = <span class="keyword">new</span> <span class="title class_">Entry</span>[len];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; len; j++) &#123;</span><br><span class="line">        <span class="type">Entry</span> <span class="variable">e</span> <span class="operator">=</span> parentTable[j];</span><br><span class="line">        <span class="keyword">if</span> (e != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">            ThreadLocal&lt;Object&gt; key = (ThreadLocal&lt;Object&gt;) e.get();</span><br><span class="line">            <span class="keyword">if</span> (key != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="type">Object</span> <span class="variable">value</span> <span class="operator">=</span> key.childValue(e.value);</span><br><span class="line">                <span class="type">Entry</span> <span class="variable">c</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Entry</span>(key, value);</span><br><span class="line">                <span class="type">int</span> <span class="variable">h</span> <span class="operator">=</span> key.threadLocalHashCode &amp; (len - <span class="number">1</span>);</span><br><span class="line">                <span class="keyword">while</span> (table[h] != <span class="literal">null</span>)</span><br><span class="line">                    h = nextIndex(h, len);</span><br><span class="line">                table[h] = c;</span><br><span class="line">                size++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>ThreadLocal.ThreadLocalMap的set方法</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">set</span><span class="params">(ThreadLocal&lt;?&gt; key, Object value)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// We don&#x27;t use a fast path as with get() because it is at</span></span><br><span class="line">    <span class="comment">// least as common to use set() to create new entries as</span></span><br><span class="line">    <span class="comment">// it is to replace existing ones, in which case, a fast</span></span><br><span class="line">    <span class="comment">// path would fail more often than not.</span></span><br><span class="line"></span><br><span class="line">    Entry[] tab = table;</span><br><span class="line">    <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> tab.length;</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> key.threadLocalHashCode &amp; (len-<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">Entry</span> <span class="variable">e</span> <span class="operator">=</span> tab[i];</span><br><span class="line">         e != <span class="literal">null</span>;</span><br><span class="line">         e = tab[i = nextIndex(i, len)]) &#123;</span><br><span class="line">        ThreadLocal&lt;?&gt; k = e.get();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (k == key) &#123;</span><br><span class="line">            e.value = value;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (k == <span class="literal">null</span>) &#123;</span><br><span class="line">            replaceStaleEntry(key, value, i);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    tab[i] = <span class="keyword">new</span> <span class="title class_">Entry</span>(key, value);</span><br><span class="line">    <span class="type">int</span> <span class="variable">sz</span> <span class="operator">=</span> ++size;</span><br><span class="line">    <span class="keyword">if</span> (!cleanSomeSlots(i, sz) &amp;&amp; sz &gt;= threshold)</span><br><span class="line">        rehash();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/10/19/%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%8F%98%E9%87%8FThreadLocal/" data-id="clary8dbp0012hgythwrm8ekh" data-title="线程本地变量ThreadLocal" class="article-share-link">Partager</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">Java并发编程</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; Précédent</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Suivant &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -770,9 +750,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" rel="tag">Java基础代码示例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">Java并发编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" rel="tag">工具使用笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9E%8E%E7%8E%A9/" rel="tag">瞎玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" rel="tag">Java基础代码示例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">Java并发编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" rel="tag">工具使用笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9E%8E%E7%8E%A9/" rel="tag">瞎玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
     </div>
   </div>
 
@@ -780,9 +760,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" style="font-size: 10px;">Java基础代码示例</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" style="font-size: 13.33px;">Java并发编程</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" style="font-size: 13.33px;">工具使用笔记</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E7%9E%8E%E7%8E%A9/" style="font-size: 10px;">瞎玩</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 13.33px;">系统架构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 16.67px;">设计模式</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 10px;">题解</a>
+      <a href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" style="font-size: 10px;">Java基础代码示例</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" style="font-size: 12.5px;">Java并发编程</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" style="font-size: 12.5px;">工具使用笔记</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 17.5px;">排序</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E7%9E%8E%E7%8E%A9/" style="font-size: 10px;">瞎玩</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 12.5px;">系统架构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 10px;">题解</a>
     </div>
   </div>
 
@@ -799,9 +779,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%BF%AB%E6%8E%92/">排序-快排</a>
+          </li>
         
           <li>
             <a href="/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%A0%86%E6%8E%92%E5%BA%8F/">排序-堆排序</a>
@@ -819,10 +803,6 @@
             <a href="/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6n%E7%9A%842%E6%AC%A1%E6%96%B9%E6%B1%87%E6%80%BB/">排序-时间复杂度n的2次方汇总</a>
           </li>
         
-          <li>
-            <a href="/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">排序-插入排序</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -837,7 +817,7 @@
     <div id="footer-info" class="inner">
       
       &copy; 2022 Avin Zhang<br>
-      Propulsé par <a href="https://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

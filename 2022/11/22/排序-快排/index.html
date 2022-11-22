@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   
   
-  <title>一致性hash算法 | Avin技术笔记</title>
+  <title>排序-快排 | Avin技术笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="一致性hash算法的使用场景，缺点，解决方案 使用场景    解决负载均衡  分配请求  分配服务   解决负载均衡的方法 轮流：一个一个来，轮流需要每个服务或数据都是一致的  加权轮流  hash算法，不同的请求按照hash永远落在对应的位置，但hash算法系统扩容缩容，所有的数据都要重新分配  一致性hash算法   一致性hash算法 所有的请求按照 $2^{32}$ 取模  存储节">
+  <meta name="description" content="快排平均时间复杂度O(nlogn)，平均空间复杂度O(logn)。效率和使用比较多的排序算法。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一致性hash算法">
-<meta property="og:url" content="https://qwzhang01.github.io/2022/11/03/%E4%B8%80%E8%87%B4%E6%80%A7hash%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:title" content="排序-快排">
+<meta property="og:url" content="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%BF%AB%E6%8E%92/index.html">
 <meta property="og:site_name" content="Avin技术笔记">
-<meta property="og:description" content="一致性hash算法的使用场景，缺点，解决方案 使用场景    解决负载均衡  分配请求  分配服务   解决负载均衡的方法 轮流：一个一个来，轮流需要每个服务或数据都是一致的  加权轮流  hash算法，不同的请求按照hash永远落在对应的位置，但hash算法系统扩容缩容，所有的数据都要重新分配  一致性hash算法   一致性hash算法 所有的请求按照 $2^{32}$ 取模  存储节">
+<meta property="og:description" content="快排平均时间复杂度O(nlogn)，平均空间复杂度O(logn)。效率和使用比较多的排序算法。">
 <meta property="og:locale">
-<meta property="article:published_time" content="2022-11-03T06:13:34.000Z">
-<meta property="article:modified_time" content="2022-11-17T10:39:55.220Z">
+<meta property="article:published_time" content="2022-11-22T09:50:39.000Z">
+<meta property="article:modified_time" content="2022-11-22T10:17:22.006Z">
 <meta property="article:author" content="Avin Zhang">
-<meta property="article:tag" content="系统架构">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="排序">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Avin技术笔记" type="application/atom+xml">
@@ -78,10 +79,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-一致性hash算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-排序-快排" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2022/11/03/%E4%B8%80%E8%87%B4%E6%80%A7hash%E7%AE%97%E6%B3%95/" class="article-date">
-  <time class="dt-published" datetime="2022-11-03T06:13:34.000Z" itemprop="datePublished">2022-11-03</time>
+    <a href="/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%BF%AB%E6%8E%92/" class="article-date">
+  <time class="dt-published" datetime="2022-11-22T09:50:39.000Z" itemprop="datePublished">2022-11-22</time>
 </a>
     
   </div>
@@ -92,7 +93,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      一致性hash算法
+      排序-快排
     </h1>
   
 
@@ -100,43 +101,16 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>    一致性hash算法的使用场景，缺点，解决方案</p>
-<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><p>    解决负载均衡</p>
-<ul>
-<li><p>分配请求</p>
-</li>
-<li><p>分配服务</p>
-</li>
-</ul>
-<h4 id="解决负载均衡的方法"><a href="#解决负载均衡的方法" class="headerlink" title="解决负载均衡的方法"></a>解决负载均衡的方法</h4><ul>
-<li><p>轮流：一个一个来，轮流需要每个服务或数据都是一致的</p>
-</li>
-<li><p>加权轮流</p>
-</li>
-<li><p>hash算法，不同的请求按照hash永远落在对应的位置，但hash算法系统扩容缩容，所有的数据都要重新分配</p>
-</li>
-<li><p>一致性hash算法</p>
-</li>
-</ul>
-<h4 id="一致性hash算法"><a href="#一致性hash算法" class="headerlink" title="一致性hash算法"></a>一致性hash算法</h4><ul>
-<li><p>所有的请求按照 $2^{32}$ 取模</p>
-</li>
-<li><p>存储节点对 $2^{32}$ 取模</p>
-</li>
-<li><p>根据请求的模，在hash环上顺时针找到第一个节点，这样如果扩容或缩容影响的数据量就很少了</p>
-</li>
-<li><p>一致性hash算法解决负载均衡采用虚拟节点，即一个节点映射为多个hash环上的节点</p>
-</li>
-</ul>
+        <p>    快排平均时间复杂度O(nlogn)，平均空间复杂度O(logn)。效率和使用比较多的排序算法。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/03/%E4%B8%80%E8%87%B4%E6%80%A7hash%E7%AE%97%E6%B3%95/" data-id="clas2dbjg0004x4ytbjwd2zxg" data-title="一致性hash算法" class="article-share-link">Share</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%BF%AB%E6%8E%92/" data-id="clas2dbjo000hx4ytaqwbapp3" data-title="排序-快排" class="article-share-link">Share</a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
 
     </footer>
   </div>
@@ -144,19 +118,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2022/11/04/%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          数组中的算法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%A0%86%E6%8E%92%E5%BA%8F/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">大型网站页面静态化方案</div>
+      <div class="article-nav-title">排序-堆排序</div>
     </a>
   
 </nav>
