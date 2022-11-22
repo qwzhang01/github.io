@@ -78,6 +78,120 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-数据结构-树的概念" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5/" class="article-date">
+  <time class="dt-published" datetime="2022-11-21T10:33:18.000Z" itemprop="datePublished">2022-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/11/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5/">数据结构-树的概念</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>    </p>
+<p>    树是由n(n&gt;&#x3D;0)个有限节点组成一个具有层次关系的集合。常见的树有平衡二叉树、二叉查找树、平衡二叉查找树（AVL树、黄黑树）、完全二叉树、满二叉树等。</p>
+<h5 id="常见概念"><a href="#常见概念" class="headerlink" title="常见概念"></a>常见概念</h5><ul>
+<li><p>节点高度，节点到叶子节点的最厂路径</p>
+</li>
+<li><p>节点深度，根节点到该节点的边的个数</p>
+</li>
+<li><p>节点层次，深度+1</p>
+</li>
+<li><p>树的高度，根节点的高度</p>
+</li>
+</ul>
+<h5 id="树的存储方式"><a href="#树的存储方式" class="headerlink" title="树的存储方式"></a>树的存储方式</h5><ul>
+<li><p>链式存储</p>
+</li>
+<li><p>数组存储(x位于i，则i * 2&#x3D;左子树，i * 2+1&#x3D;右子树)</p>
+</li>
+</ul>
+<p>   </p>
+<h5 id="满二叉树"><a href="#满二叉树" class="headerlink" title="满二叉树"></a>满二叉树</h5><ul>
+<li><p>叶子节点在最后一层</p>
+</li>
+<li><p>叶子节点外，所有节点都有左右子树</p>
+</li>
+</ul>
+<h5 id="完全二叉树"><a href="#完全二叉树" class="headerlink" title="完全二叉树"></a>完全二叉树</h5><ul>
+<li><p>叶子节点在最后2层</p>
+</li>
+<li><p>最后一层叶子靠左</p>
+</li>
+<li><p>其他层节点数最大</p>
+</li>
+</ul>
+<h5 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h5><ul>
+<li><p>对于任意节点，左子树的每个节点小于该节点</p>
+</li>
+<li><p>对于任意节点，右子树的每个节点大于该节点</p>
+</li>
+</ul>
+<h5 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h5><ul>
+<li>任意节点左右子树高度相差不能大于1</li>
+</ul>
+<h5 id="平衡二叉查找树"><a href="#平衡二叉查找树" class="headerlink" title="平衡二叉查找树"></a>平衡二叉查找树</h5><ul>
+<li><p>平衡二叉树的特征</p>
+</li>
+<li><p>二叉查找树的特征</p>
+</li>
+</ul>
+<h5 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h5><ul>
+<li><p>完全二叉树</p>
+</li>
+<li><p>每个节点大于等于（或小于等于）子树中每个节点的值</p>
+</li>
+</ul>
+<h5 id="堆的操作"><a href="#堆的操作" class="headerlink" title="堆的操作"></a>堆的操作</h5><ul>
+<li><p>堆化：插入</p>
+</li>
+<li><p>删除堆顶元素</p>
+</li>
+</ul>
+<h5 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h5><ul>
+<li><p>建堆，可以从上往下堆化，或从下往上堆化</p>
+</li>
+<li><p>排序，取堆顶，与末尾交换然后堆化，继续取堆顶，与末尾交换，再堆化</p>
+</li>
+</ul>
+<h5 id="堆的应用"><a href="#堆的应用" class="headerlink" title="堆的应用"></a>堆的应用</h5><ul>
+<li><p>优先级队列</p>
+</li>
+<li><p>TOP K 问题</p>
+</li>
+<li><p>求中位数</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qwzhang01.github.io/2022/11/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5/" data-id="claru0znt000q0kytdthy7ct4" data-title="数据结构-树的概念" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-排序-希尔排序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/11/18/%E6%8E%92%E5%BA%8F-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" class="article-date">
@@ -109,7 +223,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" data-id="claqnc9rp000fqwyt5tc5ej9c" data-title="排序-希尔排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" data-id="claru0zno000f0kytbxar7y9i" data-title="排序-希尔排序" class="article-share-link">Teilen</a>
       
       
       
@@ -156,7 +270,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6n%E7%9A%842%E6%AC%A1%E6%96%B9%E6%B1%87%E6%80%BB/" data-id="claqnc9rq000jqwyt7v3v1hth" data-title="排序-时间复杂度n的2次方汇总" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6n%E7%9A%842%E6%AC%A1%E6%96%B9%E6%B1%87%E6%80%BB/" data-id="claru0znq000l0kyt1kx4c4w7" data-title="排序-时间复杂度n的2次方汇总" class="article-share-link">Teilen</a>
       
       
       
@@ -212,7 +326,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" data-id="claqnc9rp000hqwyt2ue2970d" data-title="排序-插入排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" data-id="claru0zno000h0kyt188y6zuz" data-title="排序-插入排序" class="article-share-link">Teilen</a>
       
       
       
@@ -257,7 +371,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" data-id="claqnc9rr000lqwytaryb89hd" data-title="排序-选择排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" data-id="claru0znp000j0kyta9x05uf2" data-title="排序-选择排序" class="article-share-link">Teilen</a>
       
       
       
@@ -314,7 +428,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" data-id="claqnc9rn000dqwyt34653rof" data-title="排序-冒泡排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" data-id="claru0znm000d0kytd875cp94" data-title="排序-冒泡排序" class="article-share-link">Teilen</a>
       
       
       
@@ -361,7 +475,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/09/%E5%B0%B1%E6%98%AF%E7%8E%A9/" data-id="claqnc9rl0009qwytbtjq4o2v" data-title="就是玩" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/09/%E5%B0%B1%E6%98%AF%E7%8E%A9/" data-id="claru0znk00090kytej237s56" data-title="就是玩" class="article-share-link">Teilen</a>
       
       
       
@@ -416,7 +530,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/08/%E5%93%88%E5%B8%8C%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="claqnc9ri0005qwyt3qqn64cf" data-title="哈希表中的算法" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/08/%E5%93%88%E5%B8%8C%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="claru0znh00050kyt726w7w19" data-title="哈希表中的算法" class="article-share-link">Teilen</a>
       
       
       
@@ -472,7 +586,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/08/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/" data-id="claqnc9ru000tqwyt7bdlcibq" data-title="环形链表Ⅱ题解笔记" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/08/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/" data-id="claru0zo5001c0kytaeiz2bdd" data-title="环形链表Ⅱ题解笔记" class="article-share-link">Teilen</a>
       
       
       
@@ -545,77 +659,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/07/%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="claqnc9s6001mqwyt4fse86kx" data-title="链表中的算法" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-数组中的算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/11/04/%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" class="article-date">
-  <time class="dt-published" datetime="2022-11-04T11:38:43.000Z" itemprop="datePublished">2022-11-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/11/04/%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/">数组中的算法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h5 id="数组的特性"><a href="#数组的特性" class="headerlink" title="数组的特性"></a>数组的特性</h5><ul>
-<li><p>数组下标从0 开始</p>
-</li>
-<li><p>数组是内存连续的</p>
-</li>
-</ul>
-<h5 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h5><ul>
-<li><p>适用场景：有序数组</p>
-</li>
-<li><p>target 在左闭右闭即[left, right]的区间: 循环条件l &lt;&#x3D; r, 左半部分选择r &#x3D; m - 1;</p>
-</li>
-<li><p>target 在左闭右开即[left, right)的区间:循环条件l &lt; r, 左半部分选择r &#x3D; m;</p>
-</li>
-</ul>
-<h5 id="双指针法"><a href="#双指针法" class="headerlink" title="双指针法"></a>双指针法</h5><ul>
-<li><p>适用条件：对数组或链表需要两次for循环的算法</p>
-</li>
-<li><p>快慢指针，快指针寻找需要处理的下标，慢指针指向下一个覆盖的下标</p>
-</li>
-<li><p>相向指针，类似循环指针，在某个位置朝相反方向移动</p>
-</li>
-</ul>
-<h5 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h5><ul>
-<li><p>窗口内是什么，一般是符合需求的子串</p>
-</li>
-<li><p>如何移动起始位置，起始位置对应的数据不符合子串需求</p>
-</li>
-<li><p>如何移动结束位置，结束位置对应的数据仍然符合子串需求</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/04/%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="claqnc9rt000qqwyth5x75i3b" data-title="数组中的算法" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/07/%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="claru0zo8001j0kytd0wa5xsg" data-title="链表中的算法" class="article-share-link">Teilen</a>
       
       
       
@@ -647,7 +691,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" rel="tag">Java基础代码示例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">Java并发编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" rel="tag">工具使用笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9E%8E%E7%8E%A9/" rel="tag">瞎玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" rel="tag">Java基础代码示例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">Java并发编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" rel="tag">工具使用笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9E%8E%E7%8E%A9/" rel="tag">瞎玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
     </div>
   </div>
 
@@ -657,7 +701,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" style="font-size: 10px;">Java基础代码示例</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" style="font-size: 13.33px;">Java并发编程</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" style="font-size: 13.33px;">工具使用笔记</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E7%9E%8E%E7%8E%A9/" style="font-size: 10px;">瞎玩</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 13.33px;">系统架构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 16.67px;">设计模式</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 10px;">题解</a>
+      <a href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" style="font-size: 10px;">Java基础代码示例</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" style="font-size: 13.33px;">Java并发编程</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" style="font-size: 13.33px;">工具使用笔记</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E7%9E%8E%E7%8E%A9/" style="font-size: 10px;">瞎玩</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 13.33px;">系统架构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 16.67px;">设计模式</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 10px;">题解</a>
     </div>
   </div>
 
@@ -679,6 +723,10 @@
       <ul>
         
           <li>
+            <a href="/2022/11/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5/">数据结构-树的概念</a>
+          </li>
+        
+          <li>
             <a href="/2022/11/18/%E6%8E%92%E5%BA%8F-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/">排序-希尔排序</a>
           </li>
         
@@ -692,10 +740,6 @@
         
           <li>
             <a href="/2022/11/17/%E6%8E%92%E5%BA%8F-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">排序-选择排序</a>
-          </li>
-        
-          <li>
-            <a href="/2022/11/17/%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">排序-冒泡排序</a>
           </li>
         
       </ul>
