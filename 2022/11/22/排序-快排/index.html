@@ -14,7 +14,7 @@
 <meta property="og:description" content="快排平均时间复杂度O(nlogn)，平均空间复杂度O(logn)。效率和使用比较多的排序算法。 快排基本思想 从数组取出一个数，叫基数（privot）  遍历数组，将数组中的数按照大于和小于基数，分布在基数的两边  将左右两个数组再次重复以上步骤，直到分成的子数组数量只要1个或2个   快排退出递归的边界 当某个区域只剩下一个数字或0个数字的时候就不需要排序了  start 存在 等于mi">
 <meta property="og:locale">
 <meta property="article:published_time" content="2022-11-22T09:50:39.000Z">
-<meta property="article:modified_time" content="2022-11-22T12:10:56.963Z">
+<meta property="article:modified_time" content="2022-11-23T04:18:36.132Z">
 <meta property="article:author" content="Avin Zhang">
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="排序">
@@ -139,12 +139,12 @@
 </li>
 </ul>
 <h5 id="洗牌算法"><a href="#洗牌算法" class="headerlink" title="洗牌算法"></a>洗牌算法</h5><p>    每次从未处理的数据中，随机取一个数字，将其放入数字末尾。即JDK的Collections.shuffle()</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">quickSort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%BF%AB%E6%8E%92/" data-id="clas6ep5y000jo0yt8utt8gj9" data-title="排序-快排" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%BF%AB%E6%8E%92/" data-id="clat6aums000lecyt6ewmh85y" data-title="排序-快排" class="article-share-link">Teilen</a>
       
       
       
@@ -155,6 +155,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2022/11/23/%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0%E9%A2%98%E8%A7%A3-%E6%91%A9%E5%B0%94%E6%8A%95%E7%A5%A8%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          多数元素题解-摩尔投票法
+        
+      </div>
+    </a>
   
   
     <a href="/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%A0%86%E6%8E%92%E5%BA%8F/" id="article-nav-older" class="article-nav-link-wrap">
@@ -189,7 +198,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" style="font-size: 10px;">Java基础代码示例</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" style="font-size: 12.5px;">Java并发编程</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" style="font-size: 12.5px;">工具使用笔记</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 17.5px;">排序</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E7%9E%8E%E7%8E%A9/" style="font-size: 10px;">瞎玩</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 12.5px;">系统架构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 10px;">题解</a>
+      <a href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" style="font-size: 10px;">Java基础代码示例</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" style="font-size: 12.5px;">Java并发编程</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" style="font-size: 12.5px;">工具使用笔记</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 17.5px;">排序</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E7%9E%8E%E7%8E%A9/" style="font-size: 10px;">瞎玩</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 12.5px;">系统架构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 12.5px;">题解</a>
     </div>
   </div>
 
@@ -211,6 +220,10 @@
       <ul>
         
           <li>
+            <a href="/2022/11/23/%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0%E9%A2%98%E8%A7%A3-%E6%91%A9%E5%B0%94%E6%8A%95%E7%A5%A8%E6%B3%95/">多数元素题解-摩尔投票法</a>
+          </li>
+        
+          <li>
             <a href="/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%BF%AB%E6%8E%92/">排序-快排</a>
           </li>
         
@@ -224,10 +237,6 @@
         
           <li>
             <a href="/2022/11/18/%E6%8E%92%E5%BA%8F-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/">排序-希尔排序</a>
-          </li>
-        
-          <li>
-            <a href="/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6n%E7%9A%842%E6%AC%A1%E6%96%B9%E6%B1%87%E6%80%BB/">排序-时间复杂度n的2次方汇总</a>
           </li>
         
       </ul>
