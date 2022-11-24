@@ -64,12 +64,12 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Rechercher"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
       </div>
     </div>
   </div>
@@ -77,6 +77,66 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-排序-归并排序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/24/%E6%8E%92%E5%BA%8F-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time class="dt-published" datetime="2022-11-24T02:38:52.000Z" itemprop="datePublished">2022-11-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/11/24/%E6%8E%92%E5%BA%8F-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">排序-归并排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>    归并排序是时间复杂度O(nlogn)，O(n)空间复杂度的排序算法。</p>
+<p>    </p>
+<h5 id="算法基本思想"><a href="#算法基本思想" class="headerlink" title="算法基本思想"></a>算法基本思想</h5><ul>
+<li><p>对两个有序数组合并成为有序数组，只需要O(n)的时间复杂度</p>
+</li>
+<li><p>将数组从中间拆分为2个数组，递归拆分，直到只剩一个数字</p>
+</li>
+<li><p>一个数字本身即为有序的，此时按照合并有序数组的方式开始合并</p>
+</li>
+<li><p>每次合并的数组本身就都是有序的，因此最后返回的即为有序数组</p>
+</li>
+</ul>
+<h5 id="空间复杂度降低思路"><a href="#空间复杂度降低思路" class="headerlink" title="空间复杂度降低思路"></a>空间复杂度降低思路</h5><ul>
+<li><p>开始定义一个和排序数组长度一致的数组做为临时储存使用，这样就不用每次都创建空间了</p>
+</li>
+<li><p>无法进行原地排序，如果使用原地排序后即变为插入排序</p>
+</li>
+<li><p>归并排序也为稳定的排序算法</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qwzhang01.github.io/2022/11/24/%E6%8E%92%E5%BA%8F-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" data-id="clav0l3w7000lxwyt9prk9fto" data-title="排序-归并排序" class="article-share-link">Partager</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-多数元素题解-摩尔投票法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
@@ -113,7 +173,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/23/%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0%E9%A2%98%E8%A7%A3-%E6%91%A9%E5%B0%94%E6%8A%95%E7%A5%A8%E6%B3%95/" data-id="clat6aumk0008ecytakkygx75" data-title="多数元素题解-摩尔投票法" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/23/%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0%E9%A2%98%E8%A7%A3-%E6%91%A9%E5%B0%94%E6%8A%95%E7%A5%A8%E6%B3%95/" data-id="clav0l3vy0008xwytahf57uru" data-title="多数元素题解-摩尔投票法" class="article-share-link">Partager</a>
       
       
       
@@ -187,12 +247,12 @@
 </li>
 </ul>
 <h5 id="洗牌算法"><a href="#洗牌算法" class="headerlink" title="洗牌算法"></a>洗牌算法</h5><p>    每次从未处理的数据中，随机取一个数字，将其放入数字末尾。即JDK的Collections.shuffle()</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] sortArray(<span class="type">int</span>[] nums) &#123;</span><br><span class="line">        quickSort(nums);</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">quickSort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">        quickSort(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">quickSort</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> start, <span class="type">int</span> end)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (start == end || start == end + <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">middle</span> <span class="operator">=</span> partition(arr, start, end);</span><br><span class="line"></span><br><span class="line">        quickSort(arr, start, middle - <span class="number">1</span>);</span><br><span class="line">        quickSort(arr, middle + <span class="number">1</span>, end);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 快排分区</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * 我要成为亿万富翁</span></span><br><span class="line"><span class="comment">     * 我要财富自由</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> start</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> end</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">partition</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> start, <span class="type">int</span> end)</span> &#123;</span><br><span class="line">        <span class="type">Random</span> <span class="variable">rand</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Random</span>();</span><br><span class="line">        <span class="type">int</span> <span class="variable">middle</span> <span class="operator">=</span> rand.nextInt((end - start) + <span class="number">1</span>) + start;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将基数放在第一位</span></span><br><span class="line">        swap(arr, middle, start);</span><br><span class="line">        <span class="comment">// 基数</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">privot</span> <span class="operator">=</span> arr[start];</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> start + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> end;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="keyword">while</span> (left &lt; right &amp;&amp; arr[left] &lt;= privot) left++;</span><br><span class="line">            <span class="keyword">while</span> (left &lt; right &amp;&amp; arr[right] &gt;= privot) right--;</span><br><span class="line">            <span class="keyword">if</span> (left &lt; right) &#123;</span><br><span class="line">                swap(arr, left, right);</span><br><span class="line">                left++;</span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (left == right &amp;&amp; arr[right] &gt; privot) right--;</span><br><span class="line">        swap(arr, start, right);</span><br><span class="line">        <span class="keyword">return</span> right;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 交换数组arr 下标 i j  的数据</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> i</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> j</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> i, <span class="type">int</span> j)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (i == j) <span class="keyword">return</span>;</span><br><span class="line">        arr[i] = arr[i] ^ arr[j];</span><br><span class="line">        arr[j] = arr[j] ^ arr[i];</span><br><span class="line">        arr[i] = arr[i] ^ arr[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%BF%AB%E6%8E%92/" data-id="clat6aums000lecyt6ewmh85y" data-title="排序-快排" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%BF%AB%E6%8E%92/" data-id="clav0l3w8000nxwyt8lsddups" data-title="排序-快排" class="article-share-link">Partager</a>
       
       
       
@@ -276,7 +336,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%A0%86%E6%8E%92%E5%BA%8F/" data-id="clat6aumr000hecyte19q6by4" data-title="排序-堆排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%A0%86%E6%8E%92%E5%BA%8F/" data-id="clav0l3w3000fxwyt8p9rd393" data-title="排序-堆排序" class="article-share-link">Partager</a>
       
       
       
@@ -398,7 +458,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5/" data-id="clat6aumw000secyt90tf3ifp" data-title="数据结构-树的概念" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5/" data-id="clav0l3we000txwyt253ic450" data-title="数据结构-树的概念" class="article-share-link">Partager</a>
       
       
       
@@ -443,7 +503,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" data-id="clat6aums000jecytf7w09y68" data-title="排序-希尔排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" data-id="clav0l3w6000jxwyt91nnf5mw" data-title="排序-希尔排序" class="article-share-link">Partager</a>
       
       
       
@@ -490,7 +550,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6n%E7%9A%842%E6%AC%A1%E6%96%B9%E6%B1%87%E6%80%BB/" data-id="clat6aumu000pecyt6horg7qf" data-title="排序-时间复杂度n的2次方汇总" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6n%E7%9A%842%E6%AC%A1%E6%96%B9%E6%B1%87%E6%80%BB/" data-id="clav0l3wc000rxwytb7ce6rjj" data-title="排序-时间复杂度n的2次方汇总" class="article-share-link">Partager</a>
       
       
       
@@ -546,7 +606,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" data-id="clat6aumt000necyt0925hxhx" data-title="排序-插入排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" data-id="clav0l3wb000pxwyt8ox3hywm" data-title="排序-插入排序" class="article-share-link">Partager</a>
       
       
       
@@ -591,7 +651,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" data-id="clat6aumw000recyt9rgqdneq" data-title="排序-选择排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" data-id="clav0l3wd000sxwyt8qxbg71o" data-title="排序-选择排序" class="article-share-link">Partager</a>
       
       
       
@@ -648,7 +708,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" data-id="clat6aumq000fecytd76qbi0u" data-title="排序-冒泡排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" data-id="clav0l3w5000hxwyt1wxugmln" data-title="排序-冒泡排序" class="article-share-link">Partager</a>
       
       
       
@@ -662,58 +722,11 @@
 
 
   
-    <article id="post-就是玩" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/11/09/%E5%B0%B1%E6%98%AF%E7%8E%A9/" class="article-date">
-  <time class="dt-published" datetime="2022-11-09T07:18:51.000Z" itemprop="datePublished">2022-11-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/11/09/%E5%B0%B1%E6%98%AF%E7%8E%A9/">就是玩</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>    “好啊,‘春雨贵如油’,今年要有个好收成了。”淅沥沥的春雨飘在泥泞的小路,飘在路旁一望无际的麦田里。</p>
-<p>    “好，哈、哈、哈……”一大汉身材魁梧，头发微霜，正行在小路上。看着天空加厚的云层,大汉哈哈大笑。一股春风扑面吹来,凉凉的多挟带了几滴春雨,共落在了大汉脸上,大汉一哆嗦,从腰间拿出一壶酒朝嘴里灌了起来,一阵咕咚声后,大汉依旧把酒壶别在腰里,寻了块石头摸去雨水,坐在上面,看着起伏的麦浪,喃喃说:“该来了吧。”</p>
-<p>    一阵风过,麦浪的一头正有一骑,朝大汉走来,马上那人头带笠帽,身穿蓑衣,大汉望到,立起身来,“哈哈,来了,哈。”说着从腰间取出酒壶，“咕咚”又喝了一口。</p>
-<p>    “哒、哒、哒”那骑行到大汉面前,翻身下马躬身下拜道：“拜见大师伯，师傅有要事，不能如约，望大师伯见谅。”“嗯”大汉退了一步，又坐在石块上，缓缓道：“你师傅出事了？”“不错”唇动手动，只见蓑衣人腰间白光一闪，话完时手中已多出了一柄寒光闪闪的亮剑，直指大汉心窝，大汉一惊，眼看剑将刺穿自己的心脏，闪无可闪，挡无可挡。也是他临危不乱，抛出手中酒壶，直向蓑衣人面部。大汉心道：“这一剑即便刺中，他自己也不免被这酒壶伤及面门，岂不回剑自卫。”不料蓑衣人一跃，大吼一声，长剑挥处一道红光闪过。“啪”酒壶也落在蓑衣人右肩，蓑衣人倒飞数尺，蹲坐在地上，口中 已喷出数股鲜血。那大汉缓缓一晃，扶住石块，道：“你，你是谁？冒充我师弟门下。姓范的与你有何深仇，要你如此拼命。”蓑衣人并不答话，扶住剑立了起来转身就走。</p>
-<p>    突然，一道白光闪过，大汉大叫一声，道：“你，卑鄙。”蓑衣人回头看时，大汉胸口已多了两把匕首，刀刃全没入了。“冰封”，大汉最后吐出这两个字，直愣愣再也不动了。</p>
-<p>    蓑衣人走回去将两把匕首拔出来，从怀中取出三粒丹药放入大汉口中，长揖一下，转身骑上马走了。这“冰封”乃是“三春会”独门毒药,服下之后就如冻住了一般,坚硬无比。而体内却如火烧，巨痛难忍。若三日内服了解药虽说巨痛，七七四十九天后尚可溶冻化火,且可治愈内伤,倘三日内服不得解药,四十九天后,五脏六腑皆被烧烂,巨痛难忍而死。适才蓑衣人给大汉所服即解药。“冰封”原是“范农会”试探人才所用，凡是要入“范农会”者都得先忍过四十九天“冰封”之苦，若能说自己不悔，才可招入“范农会”。所以“范农会”的人人身上都有“冰封”和解药。</p>
-<p>    丝丝的细雨，麦浪如潮，蓑衣人一骑正行在麦间，骏马飞过，留下一道道月牙儿。行了数里，前面闪出一条大路，路两边各竖一合抱粗的大石柱，石柱上横跨一大石匾，上书大隶书“范农会”，左边石柱上书“侠会范农，共伐天下不平事”，右边书“义举五岳，全保家国忠良人”。蓑衣人纵马驰入路中央，行过匾额，朝石柱冷笑一声，从怀中取出两瓶药，抛上匾额，扭过头，策马飞离了“三春会”。路两旁绿麦幽幽，遥远的尽头灰绿连成一体。细雨依旧，泥湿湿的大路直锸入灰蒙蒙的云际，四周一片空旷。行了一程，雨渐渐停了，蓑衣人也慢了下来。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/09/%E5%B0%B1%E6%98%AF%E7%8E%A9/" data-id="clat6aumo000cecytfv7lh6t4" data-title="就是玩" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%9E%8E%E7%8E%A9/" rel="tag">瞎玩</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">weiter &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Suivant &raquo;</a>
   </nav>
 
 </section>
@@ -725,7 +738,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" rel="tag">Java基础代码示例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">Java并发编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" rel="tag">工具使用笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9E%8E%E7%8E%A9/" rel="tag">瞎玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
     </div>
@@ -735,7 +748,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" style="font-size: 10px;">Java基础代码示例</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" style="font-size: 12.5px;">Java并发编程</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" style="font-size: 12.5px;">工具使用笔记</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 17.5px;">排序</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E7%9E%8E%E7%8E%A9/" style="font-size: 10px;">瞎玩</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 12.5px;">系统架构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 12.5px;">题解</a>
     </div>
@@ -744,7 +757,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
     </div>
@@ -754,9 +767,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2022/11/24/%E6%8E%92%E5%BA%8F-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">排序-归并排序</a>
+          </li>
         
           <li>
             <a href="/2022/11/23/%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0%E9%A2%98%E8%A7%A3-%E6%91%A9%E5%B0%94%E6%8A%95%E7%A5%A8%E6%B3%95/">多数元素题解-摩尔投票法</a>
@@ -774,10 +791,6 @@
             <a href="/2022/11/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5/">数据结构-树的概念</a>
           </li>
         
-          <li>
-            <a href="/2022/11/18/%E6%8E%92%E5%BA%8F-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/">排序-希尔排序</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -792,7 +805,7 @@
     <div id="footer-info" class="inner">
       
       &copy; 2022 Avin Zhang<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+      Propulsé par <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

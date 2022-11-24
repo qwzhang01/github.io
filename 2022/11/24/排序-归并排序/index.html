@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   
   
-  <title>就是玩 | Avin技术笔记</title>
+  <title>排序-归并排序 | Avin技术笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="“好啊,‘春雨贵如油’,今年要有个好收成了。”淅沥沥的春雨飘在泥泞的小路,飘在路旁一望无际的麦田里。     “好，哈、哈、哈……”一大汉身材魁梧，头发微霜，正行在小路上。看着天空加厚的云层,大汉哈哈大笑。一股春风扑面吹来,凉凉的多挟带了几滴春雨,共落在了大汉脸上,大汉一哆嗦,从腰间拿出一壶酒朝嘴里灌了起来,一阵咕咚声后,大汉依旧把酒壶别在腰里,寻了块石头摸去雨水,坐在上面,看着起伏的麦浪">
+  <meta name="description" content="归并排序是时间复杂度O(nlogn)，O(n)空间复杂度的排序算法。      算法基本思想 对两个有序数组合并成为有序数组，只需要O(n)的时间复杂度  将数组从中间拆分为2个数组，递归拆分，直到只剩一个数字  一个数字本身即为有序的，此时按照合并有序数组的方式开始合并  每次合并的数组本身就都是有序的，因此最后返回的即为有序数组   空间复杂度降低思路 开始定义一个和排序数组长度一致的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="就是玩">
-<meta property="og:url" content="https://qwzhang01.github.io/2022/11/09/%E5%B0%B1%E6%98%AF%E7%8E%A9/index.html">
+<meta property="og:title" content="排序-归并排序">
+<meta property="og:url" content="https://qwzhang01.github.io/2022/11/24/%E6%8E%92%E5%BA%8F-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/index.html">
 <meta property="og:site_name" content="Avin技术笔记">
-<meta property="og:description" content="“好啊,‘春雨贵如油’,今年要有个好收成了。”淅沥沥的春雨飘在泥泞的小路,飘在路旁一望无际的麦田里。     “好，哈、哈、哈……”一大汉身材魁梧，头发微霜，正行在小路上。看着天空加厚的云层,大汉哈哈大笑。一股春风扑面吹来,凉凉的多挟带了几滴春雨,共落在了大汉脸上,大汉一哆嗦,从腰间拿出一壶酒朝嘴里灌了起来,一阵咕咚声后,大汉依旧把酒壶别在腰里,寻了块石头摸去雨水,坐在上面,看着起伏的麦浪">
+<meta property="og:description" content="归并排序是时间复杂度O(nlogn)，O(n)空间复杂度的排序算法。      算法基本思想 对两个有序数组合并成为有序数组，只需要O(n)的时间复杂度  将数组从中间拆分为2个数组，递归拆分，直到只剩一个数字  一个数字本身即为有序的，此时按照合并有序数组的方式开始合并  每次合并的数组本身就都是有序的，因此最后返回的即为有序数组   空间复杂度降低思路 开始定义一个和排序数组长度一致的">
 <meta property="og:locale">
-<meta property="article:published_time" content="2022-11-09T07:18:51.000Z">
-<meta property="article:modified_time" content="2022-11-09T07:20:32.840Z">
+<meta property="article:published_time" content="2022-11-24T02:38:52.000Z">
+<meta property="article:modified_time" content="2022-11-24T11:51:10.937Z">
 <meta property="article:author" content="Avin Zhang">
-<meta property="article:tag" content="瞎玩">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="排序">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Avin技术笔记" type="application/atom+xml">
@@ -78,10 +79,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-就是玩" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-排序-归并排序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2022/11/09/%E5%B0%B1%E6%98%AF%E7%8E%A9/" class="article-date">
-  <time class="dt-published" datetime="2022-11-09T07:18:51.000Z" itemprop="datePublished">2022-11-09</time>
+    <a href="/2022/11/24/%E6%8E%92%E5%BA%8F-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time class="dt-published" datetime="2022-11-24T02:38:52.000Z" itemprop="datePublished">2022-11-24</time>
 </a>
     
   </div>
@@ -92,7 +93,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      就是玩
+      排序-归并排序
     </h1>
   
 
@@ -100,22 +101,35 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>    “好啊,‘春雨贵如油’,今年要有个好收成了。”淅沥沥的春雨飘在泥泞的小路,飘在路旁一望无际的麦田里。</p>
-<p>    “好，哈、哈、哈……”一大汉身材魁梧，头发微霜，正行在小路上。看着天空加厚的云层,大汉哈哈大笑。一股春风扑面吹来,凉凉的多挟带了几滴春雨,共落在了大汉脸上,大汉一哆嗦,从腰间拿出一壶酒朝嘴里灌了起来,一阵咕咚声后,大汉依旧把酒壶别在腰里,寻了块石头摸去雨水,坐在上面,看着起伏的麦浪,喃喃说:“该来了吧。”</p>
-<p>    一阵风过,麦浪的一头正有一骑,朝大汉走来,马上那人头带笠帽,身穿蓑衣,大汉望到,立起身来,“哈哈,来了,哈。”说着从腰间取出酒壶，“咕咚”又喝了一口。</p>
-<p>    “哒、哒、哒”那骑行到大汉面前,翻身下马躬身下拜道：“拜见大师伯，师傅有要事，不能如约，望大师伯见谅。”“嗯”大汉退了一步，又坐在石块上，缓缓道：“你师傅出事了？”“不错”唇动手动，只见蓑衣人腰间白光一闪，话完时手中已多出了一柄寒光闪闪的亮剑，直指大汉心窝，大汉一惊，眼看剑将刺穿自己的心脏，闪无可闪，挡无可挡。也是他临危不乱，抛出手中酒壶，直向蓑衣人面部。大汉心道：“这一剑即便刺中，他自己也不免被这酒壶伤及面门，岂不回剑自卫。”不料蓑衣人一跃，大吼一声，长剑挥处一道红光闪过。“啪”酒壶也落在蓑衣人右肩，蓑衣人倒飞数尺，蹲坐在地上，口中 已喷出数股鲜血。那大汉缓缓一晃，扶住石块，道：“你，你是谁？冒充我师弟门下。姓范的与你有何深仇，要你如此拼命。”蓑衣人并不答话，扶住剑立了起来转身就走。</p>
-<p>    突然，一道白光闪过，大汉大叫一声，道：“你，卑鄙。”蓑衣人回头看时，大汉胸口已多了两把匕首，刀刃全没入了。“冰封”，大汉最后吐出这两个字，直愣愣再也不动了。</p>
-<p>    蓑衣人走回去将两把匕首拔出来，从怀中取出三粒丹药放入大汉口中，长揖一下，转身骑上马走了。这“冰封”乃是“三春会”独门毒药,服下之后就如冻住了一般,坚硬无比。而体内却如火烧，巨痛难忍。若三日内服了解药虽说巨痛，七七四十九天后尚可溶冻化火,且可治愈内伤,倘三日内服不得解药,四十九天后,五脏六腑皆被烧烂,巨痛难忍而死。适才蓑衣人给大汉所服即解药。“冰封”原是“范农会”试探人才所用，凡是要入“范农会”者都得先忍过四十九天“冰封”之苦，若能说自己不悔，才可招入“范农会”。所以“范农会”的人人身上都有“冰封”和解药。</p>
-<p>    丝丝的细雨，麦浪如潮，蓑衣人一骑正行在麦间，骏马飞过，留下一道道月牙儿。行了数里，前面闪出一条大路，路两边各竖一合抱粗的大石柱，石柱上横跨一大石匾，上书大隶书“范农会”，左边石柱上书“侠会范农，共伐天下不平事”，右边书“义举五岳，全保家国忠良人”。蓑衣人纵马驰入路中央，行过匾额，朝石柱冷笑一声，从怀中取出两瓶药，抛上匾额，扭过头，策马飞离了“三春会”。路两旁绿麦幽幽，遥远的尽头灰绿连成一体。细雨依旧，泥湿湿的大路直锸入灰蒙蒙的云际，四周一片空旷。行了一程，雨渐渐停了，蓑衣人也慢了下来。</p>
+        <p>    归并排序是时间复杂度O(nlogn)，O(n)空间复杂度的排序算法。</p>
+<p>    </p>
+<h5 id="算法基本思想"><a href="#算法基本思想" class="headerlink" title="算法基本思想"></a>算法基本思想</h5><ul>
+<li><p>对两个有序数组合并成为有序数组，只需要O(n)的时间复杂度</p>
+</li>
+<li><p>将数组从中间拆分为2个数组，递归拆分，直到只剩一个数字</p>
+</li>
+<li><p>一个数字本身即为有序的，此时按照合并有序数组的方式开始合并</p>
+</li>
+<li><p>每次合并的数组本身就都是有序的，因此最后返回的即为有序数组</p>
+</li>
+</ul>
+<h5 id="空间复杂度降低思路"><a href="#空间复杂度降低思路" class="headerlink" title="空间复杂度降低思路"></a>空间复杂度降低思路</h5><ul>
+<li><p>开始定义一个和排序数组长度一致的数组做为临时储存使用，这样就不用每次都创建空间了</p>
+</li>
+<li><p>无法进行原地排序，如果使用原地排序后即变为插入排序</p>
+</li>
+<li><p>归并排序也为稳定的排序算法</p>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/09/%E5%B0%B1%E6%98%AF%E7%8E%A9/" data-id="clav0l3w0000cxwyt2waq1ioz" data-title="就是玩" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/24/%E6%8E%92%E5%BA%8F-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" data-id="clav0l3w7000lxwyt9prk9fto" data-title="排序-归并排序" class="article-share-link">Partager</a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%9E%8E%E7%8E%A9/" rel="tag">瞎玩</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
 
     </footer>
   </div>
@@ -123,19 +137,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2022/11/17/%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
-      <div class="article-nav-title">
-        
-          排序-冒泡排序
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/11/08/%E5%93%88%E5%B8%8C%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2022/11/23/%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0%E9%A2%98%E8%A7%A3-%E6%91%A9%E5%B0%94%E6%8A%95%E7%A5%A8%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">哈希表中的算法</div>
+      <div class="article-nav-title">多数元素题解-摩尔投票法</div>
     </a>
   
 </nav>
