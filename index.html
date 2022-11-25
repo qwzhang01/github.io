@@ -78,6 +78,125 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-排序-计数排序、基数排序、桶排序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/25/%E6%8E%92%E5%BA%8F-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E6%A1%B6%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time class="dt-published" datetime="2022-11-25T10:13:33.000Z" itemprop="datePublished">2022-11-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/11/25/%E6%8E%92%E5%BA%8F-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E6%A1%B6%E6%8E%92%E5%BA%8F/">排序-计数排序、基数排序、桶排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qwzhang01.github.io/2022/11/25/%E6%8E%92%E5%BA%8F-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E6%A1%B6%E6%8E%92%E5%BA%8F/" data-id="clawck09n0001uwyt6p24f4bn" data-title="排序-计数排序、基数排序、桶排序" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-排序-时间复杂度O（nlongn）汇总" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/25/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6O%EF%BC%88nlongn%EF%BC%89%E6%B1%87%E6%80%BB/" class="article-date">
+  <time class="dt-published" datetime="2022-11-25T09:38:31.000Z" itemprop="datePublished">2022-11-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/11/25/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6O%EF%BC%88nlongn%EF%BC%89%E6%B1%87%E6%80%BB/">排序-时间复杂度O（nlongn）汇总</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>    时间复杂度是O(nlogn)的排序算法有希尔排序、堆排序、快排、归并排序。</p>
+<h5 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h5><ul>
+<li><p>取arr.length &#x2F; 2 做为间隔，逐一减小间隔</p>
+</li>
+<li><p>按照间隔，将子数组做插入排序</p>
+</li>
+</ul>
+<h5 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h5><ul>
+<li><p>构建大顶堆，从堆最后一个非叶子（数组下标 n&#x2F;2 - 1）节点开始堆化，一直到堆顶</p>
+</li>
+<li><p>取出大顶堆的堆顶元素，与数组最后一位交换</p>
+</li>
+<li><p>从当前堆顶，重新堆化</p>
+</li>
+</ul>
+<h5 id="快排"><a href="#快排" class="headerlink" title="快排"></a>快排</h5><ul>
+<li><p>随机取一个基准，即privot，将大于基准的放入右侧，小于基准的放入左侧</p>
+</li>
+<li><p>递归的跳出条件，start &#x3D; end || start &#x3D; end + 1</p>
+</li>
+<li><p>将大于基准放入左侧，小于基准放入右侧采用双指针法</p>
+</li>
+</ul>
+<h5 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h5><ul>
+<li><p>将连个有序数组合并为一个数组</p>
+</li>
+<li><p>通过递归，将数组拆分为只有一个的数组</p>
+</li>
+<li><p>反过来，再按照合并有序数组的方式合并</p>
+</li>
+</ul>
+<h5 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h5><ul>
+<li><p>时间复杂度都在O(n) ~ O($n^2$)</p>
+</li>
+<li><p>希尔排序、堆排序、快排是不稳定的排序，归并是稳定的排序</p>
+</li>
+<li><p>空间复杂度不一样，希尔排序、堆排序是O(1)，快排是O(logn)，归并是O(n)</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qwzhang01.github.io/2022/11/25/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6O%EF%BC%88nlongn%EF%BC%89%E6%B1%87%E6%80%BB/" data-id="clawck09f0000uwyteenzdofg" data-title="排序-时间复杂度O（nlongn）汇总" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-排序-归并排序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/11/24/%E6%8E%92%E5%BA%8F-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="article-date">
@@ -620,113 +739,11 @@
 
 
   
-    <article id="post-排序-选择排序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/11/17/%E6%8E%92%E5%BA%8F-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" class="article-date">
-  <time class="dt-published" datetime="2022-11-17T10:32:59.000Z" itemprop="datePublished">2022-11-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/11/17/%E6%8E%92%E5%BA%8F-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">排序-选择排序</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h4 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h4><p>    最暴力最直接的排序，2层循环，每次都取最小的放在最前面。</p>
-<p>    选择排序的优化方式是同时记录最小值下标和最大值小标，每次比较的时候选出最小值和最大值，并将最小值放在最前面，最大值放在最后面，优化后的选择排序第一层循环只需要循环一半，该优化方法也叫二元选择排序。</p>
-<p>    选择排序的时间复杂度是O($n^2$)，空间复杂度是O(1)。</p>
-<h4 id="排序算法的稳定性"><a href="#排序算法的稳定性" class="headerlink" title="排序算法的稳定性"></a>排序算法的稳定性</h4><p>    对于相当的情况，仍然保持原来的顺序，则是稳定的排序算法。</p>
-<p>    如果相当的情况，顺序有可能变，则不是稳定的排序算法。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" data-id="clav0myn7000s2sytg3qb6iyv" data-title="排序-选择排序" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-排序-冒泡排序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/11/17/%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" class="article-date">
-  <time class="dt-published" datetime="2022-11-17T08:24:17.000Z" itemprop="datePublished">2022-11-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/11/17/%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">排序-冒泡排序</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h5 id="冒泡排序介绍"><a href="#冒泡排序介绍" class="headerlink" title="冒泡排序介绍"></a>冒泡排序介绍</h5><p>    冒泡排序，使用2层循环，一边比较，一边把大的移动的下一位，这样每次循环最后一个都是当前最大的。</p>
-<p>    优化写法，如果循环内没有做一次交换，则没有剩下的就是已经排好序的，无需再继续比较。进一步优化的方法是，如果记录没有交换的下标，下次比较的时候只进行到下标位置。</p>
-<p>    时间复杂度O($n^{2}$)，空间复杂度O(1)。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">bubble</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; arr.length - <span class="number">1</span> - i; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j] &lt; arr[j + <span class="number">1</span>]) &#123;</span><br><span class="line">                swap(arr, j, j + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h5 id="交换"><a href="#交换" class="headerlink" title="交换"></a>交换</h5><p>    最常见的交换方法是开辟临时区域交换。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> arr[i];</span><br><span class="line">arr[i] = arr[j];</span><br><span class="line">arr[j] = temp;</span><br></pre></td></tr></table></figure>
-
-<p>    还有一种方式，通过先加后减或先减后加的方式，不用新内存即可实现，但这种方式有可能因为int越界导致异常。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先加后减</span></span><br><span class="line">arr[j + <span class="number">1</span>] = arr[j + <span class="number">1</span>] + arr[j];</span><br><span class="line">arr[j] = arr[j + <span class="number">1</span>] - arr[j];</span><br><span class="line">arr[j + <span class="number">1</span>] = arr[j + <span class="number">1</span>] - arr[j];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 先减后加</span></span><br><span class="line">arr[j + <span class="number">1</span>] = arr[j] - arr[j + <span class="number">1</span>];</span><br><span class="line">arr[j] = arr[j] - arr[j + <span class="number">1</span>];</span><br><span class="line">arr[j + <span class="number">1</span>] = arr[j + <span class="number">1</span>] + arr[j];</span><br></pre></td></tr></table></figure>
-
-<p>    最好的交换方式是使用位运算。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr[i] = arr[i] ^ arr[j];</span><br><span class="line">arr[j] = arr[j] ^ arr[i];</span><br><span class="line">arr[i] = arr[i] ^ arr[j];</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" data-id="clav0mymz000f2sytbyd226jt" data-title="排序-冒泡排序" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">weiter &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">weiter &raquo;</a>
   </nav>
 
 </section>
@@ -772,6 +789,14 @@
       <ul>
         
           <li>
+            <a href="/2022/11/25/%E6%8E%92%E5%BA%8F-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E6%A1%B6%E6%8E%92%E5%BA%8F/">排序-计数排序、基数排序、桶排序</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/25/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6O%EF%BC%88nlongn%EF%BC%89%E6%B1%87%E6%80%BB/">排序-时间复杂度O（nlongn）汇总</a>
+          </li>
+        
+          <li>
             <a href="/2022/11/24/%E6%8E%92%E5%BA%8F-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">排序-归并排序</a>
           </li>
         
@@ -781,14 +806,6 @@
         
           <li>
             <a href="/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%BF%AB%E6%8E%92/">排序-快排</a>
-          </li>
-        
-          <li>
-            <a href="/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%A0%86%E6%8E%92%E5%BA%8F/">排序-堆排序</a>
-          </li>
-        
-          <li>
-            <a href="/2022/11/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5/">数据结构-树的概念</a>
           </li>
         
       </ul>
