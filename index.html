@@ -64,12 +64,12 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Rechercher"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
       </div>
     </div>
   </div>
@@ -144,7 +144,7 @@
 </li>
 <li><p>设置桶的数量</p>
 </li>
-<li><p>计算最大值，最小值，根据最大值、最小值、桶的数量、排序数总数量，计算每个桶边界值，((max - min) + 1) &#x2F; bucketCount 为桶之间的差值，第一个桶即从min-差值+min, 因此 数字在桶的索引 index &#x3D; (int) ((value - min) &#x2F; gap);</p>
+<li><p>计算最大值，最小值，根据最大值、最小值、桶的数量、排序数总数量，计算每个桶边界值，(max - min) &#x2F; (bucketCount - 1) 为桶之间的差值，待排序数字在桶的索引 index &#x3D; (int) ((value - min) &#x2F; gap);</p>
 </li>
 <li><p>遍历数组，将数组分到对应的桶里面，桶的数据结构可以为数组，也可以为链表，如果是数组，最简单的做法是数组的长度设置为整个排序数组的长度，这样空间复杂度大；也可以做成可扩展的数组，类似java的ArrayList，这样在数组扩展的时候时间复杂度大；如果使用链表存储，则不存在空间复杂度的问题，但是链表排序时间复杂度高；最优的方式是在装桶的时候使用链表，在排序的时候将链表转为数组</p>
 </li>
@@ -153,12 +153,12 @@
 <li><p>合并桶为一个数组</p>
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">bucketSort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr == <span class="literal">null</span> || arr.length &lt;= <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> arr[<span class="number">0</span>];</span><br><span class="line">        <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> arr[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> e : arr) &#123;</span><br><span class="line">            <span class="keyword">if</span> (e &gt; max) max = e;</span><br><span class="line">            <span class="keyword">if</span> (e &lt; min) min = e;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">bucketCount</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (arr.length &gt; <span class="number">10</span>) &#123;</span><br><span class="line">            bucketCount = arr.length / <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">double</span> <span class="variable">gap</span> <span class="operator">=</span> ((<span class="type">double</span>) (max - min) / (bucketCount - <span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">        List&lt;Integer&gt;[] bucketTmp = <span class="keyword">new</span> <span class="title class_">LinkedList</span>[bucketCount];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> e : arr) &#123;</span><br><span class="line">            List&lt;Integer&gt; list = bucketTmp[(<span class="type">int</span>) ((e - min) / gap)];</span><br><span class="line">            <span class="keyword">if</span> (list == <span class="literal">null</span>) &#123;</span><br><span class="line">                bucketTmp[(<span class="type">int</span>) ((e - min) / gap)] = <span class="keyword">new</span> <span class="title class_">LinkedList</span>();</span><br><span class="line">                list = bucketTmp[(<span class="type">int</span>) ((e - min) / gap)];</span><br><span class="line">            &#125;</span><br><span class="line">            list.add(e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (List&lt;Integer&gt; list : bucketTmp) &#123;</span><br><span class="line">            <span class="keyword">if</span> (list == <span class="literal">null</span> || list.size() &lt;= <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">            <span class="type">int</span>[] tmp = <span class="keyword">new</span> <span class="title class_">int</span>[list.size()];</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">0</span>; n &lt; list.size(); n++) &#123;</span><br><span class="line">                tmp[n] = list.get(n);</span><br><span class="line">            &#125;</span><br><span class="line">            radixSort(tmp);</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> <span class="number">0</span>; m &lt; tmp.length; m++) &#123;</span><br><span class="line">                arr[index++] = tmp[m];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/25/%E6%8E%92%E5%BA%8F-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E6%A1%B6%E6%8E%92%E5%BA%8F/" data-id="clb3n1u96000twoytgg897aqs" data-title="排序-计数排序、基数排序、桶排序" class="article-share-link">Share</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/25/%E6%8E%92%E5%BA%8F-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E6%A1%B6%E6%8E%92%E5%BA%8F/" data-id="clb3n1u96000twoytgg897aqs" data-title="排序-计数排序、基数排序、桶排序" class="article-share-link">Partager</a>
       
       
       
@@ -237,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/25/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6O%EF%BC%88nlongn%EF%BC%89%E6%B1%87%E6%80%BB/" data-id="clb3n1u95000rwoytha1teef5" data-title="排序-时间复杂度O（nlongn）汇总" class="article-share-link">Share</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/25/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6O%EF%BC%88nlongn%EF%BC%89%E6%B1%87%E6%80%BB/" data-id="clb3n1u95000rwoytha1teef5" data-title="排序-时间复杂度O（nlongn）汇总" class="article-share-link">Partager</a>
       
       
       
@@ -297,7 +297,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/24/%E6%8E%92%E5%BA%8F-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" data-id="clb3n1u91000lwoytemxodtt3" data-title="排序-归并排序" class="article-share-link">Share</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/24/%E6%8E%92%E5%BA%8F-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" data-id="clb3n1u91000lwoytemxodtt3" data-title="排序-归并排序" class="article-share-link">Partager</a>
       
       
       
@@ -346,7 +346,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/23/%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0%E9%A2%98%E8%A7%A3-%E6%91%A9%E5%B0%94%E6%8A%95%E7%A5%A8%E6%B3%95/" data-id="clb3n1u8s0008woyt6l9x07wy" data-title="多数元素题解-摩尔投票法" class="article-share-link">Share</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/23/%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0%E9%A2%98%E8%A7%A3-%E6%91%A9%E5%B0%94%E6%8A%95%E7%A5%A8%E6%B3%95/" data-id="clb3n1u8s0008woyt6l9x07wy" data-title="多数元素题解-摩尔投票法" class="article-share-link">Partager</a>
       
       
       
@@ -425,7 +425,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%BF%AB%E6%8E%92/" data-id="clb3n1u92000nwoyt0wx4d0b7" data-title="排序-快排" class="article-share-link">Share</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%BF%AB%E6%8E%92/" data-id="clb3n1u92000nwoyt0wx4d0b7" data-title="排序-快排" class="article-share-link">Partager</a>
       
       
       
@@ -509,7 +509,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%A0%86%E6%8E%92%E5%BA%8F/" data-id="clb3n1u8z000hwoyt12c04rb0" data-title="排序-堆排序" class="article-share-link">Share</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%A0%86%E6%8E%92%E5%BA%8F/" data-id="clb3n1u8z000hwoyt12c04rb0" data-title="排序-堆排序" class="article-share-link">Partager</a>
       
       
       
@@ -631,7 +631,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5/" data-id="clb3n1u97000ywoyt9thq0tnw" data-title="数据结构-树的概念" class="article-share-link">Share</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5/" data-id="clb3n1u97000ywoyt9thq0tnw" data-title="数据结构-树的概念" class="article-share-link">Partager</a>
       
       
       
@@ -676,7 +676,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" data-id="clb3n1u91000jwoyt6y48570x" data-title="排序-希尔排序" class="article-share-link">Share</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" data-id="clb3n1u91000jwoyt6y48570x" data-title="排序-希尔排序" class="article-share-link">Partager</a>
       
       
       
@@ -723,7 +723,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6n%E7%9A%842%E6%AC%A1%E6%96%B9%E6%B1%87%E6%80%BB/" data-id="clb3n1u95000swoytdqxv22nx" data-title="排序-时间复杂度n的2次方汇总" class="article-share-link">Share</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6n%E7%9A%842%E6%AC%A1%E6%96%B9%E6%B1%87%E6%80%BB/" data-id="clb3n1u95000swoytdqxv22nx" data-title="排序-时间复杂度n的2次方汇总" class="article-share-link">Partager</a>
       
       
       
@@ -779,7 +779,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" data-id="clb3n1u94000pwoytcwmibbsy" data-title="排序-插入排序" class="article-share-link">Share</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" data-id="clb3n1u94000pwoytcwmibbsy" data-title="排序-插入排序" class="article-share-link">Partager</a>
       
       
       
@@ -797,7 +797,7 @@
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Suivant &raquo;</a>
   </nav>
 
 </section>
@@ -809,7 +809,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" rel="tag">Java基础代码示例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">Java并发编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" rel="tag">工具使用笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9E%8E%E7%8E%A9/" rel="tag">瞎玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
     </div>
@@ -819,7 +819,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" style="font-size: 10px;">Java基础代码示例</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" style="font-size: 12.5px;">Java并发编程</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" style="font-size: 12.5px;">工具使用笔记</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 17.5px;">排序</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E7%9E%8E%E7%8E%A9/" style="font-size: 10px;">瞎玩</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 12.5px;">系统架构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 12.5px;">题解</a>
     </div>
@@ -838,7 +838,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -876,7 +876,7 @@
     <div id="footer-info" class="inner">
       
       &copy; 2022 Avin Zhang<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+      Propulsé par <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
