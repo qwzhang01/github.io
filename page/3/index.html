@@ -64,12 +64,12 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Rechercher"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
       </div>
     </div>
   </div>
@@ -77,6 +77,95 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-大型网站页面静态化方案" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/" class="article-date">
+  <time class="dt-published" datetime="2022-11-03T04:15:15.000Z" itemprop="datePublished">2022-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/">大型网站页面静态化方案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h5 id="为什么要静态化"><a href="#为什么要静态化" class="headerlink" title="为什么要静态化"></a>为什么要静态化</h5><ul>
+<li>提高访问性能</li>
+<li>SEO优化友好</li>
+</ul>
+<h5 id="方案一：网页HTML化"><a href="#方案一：网页HTML化" class="headerlink" title="方案一：网页HTML化"></a>方案一：网页HTML化</h5><p><img src="/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/%E5%9B%BE1.jpg"></p>
+<ul>
+<li>管理后台调用新闻服务创建文章成功后，发送消息到消息队列</li>
+<li>静态服务监听消息，把文章静态化，即生成html文件</li>
+<li>在静态服务器上面安装一个文件同步工具，此工具的功能可以做到只同步有变动的文件，做增量同步，rsync和inotifywait</li>
+<li>通过同步工具把html文件同步到所有的web服务器</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li><p>页面无法修改</p>
+</li>
+<li><p>页面同步实时性不好，多台服务器不一定同时同步，负载均衡下刷新页面可能有是有内容有时又没有了</p>
+</li>
+<li><p>html文件太多，无法维护</p>
+</li>
+<li><p>同步工具不稳定</p>
+</li>
+</ul>
+<h5 id="方案二：伪静态化"><a href="#方案二：伪静态化" class="headerlink" title="方案二：伪静态化"></a>方案二：伪静态化</h5><p><img src="/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/%E6%A1%88%E5%9B%BE2.jpg"></p>
+<ul>
+<li><p>管理后台调用新闻服务创建文章成功后，发送消息到消息队列</p>
+</li>
+<li><p>缓存服务监听消息，把文章内容缓存到缓存服务器上面</p>
+</li>
+<li><p>用户发起请求，web服务器根据id，直接查询缓存服务器</p>
+</li>
+<li><p>获取数据返回给用户</p>
+</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li><p>缓存压力大</p>
+</li>
+<li><p>缓存维护难度大</p>
+</li>
+</ul>
+<h5 id="方案三：布局样式模板化"><a href="#方案三：布局样式模板化" class="headerlink" title="方案三：布局样式模板化"></a>方案三：布局样式模板化</h5><p><img src="/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/%E5%9B%BE3.jpg"></p>
+<ul>
+<li><p>分发层做负载均衡，利用hash一致性进行分发</p>
+</li>
+<li><p>应用层利用openresty+lua，使用html模板和nginx级的缓存</p>
+</li>
+<li><p>缓存层：jvm缓存+redis分布式缓存</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qwzhang01.github.io/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/" data-id="clb6idb3n000djoytftdcd4hw" data-title="大型网站页面静态化方案" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-Linux监听文件目录变化并同步" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
@@ -121,7 +210,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/03/Linux%E7%9B%91%E5%90%AC%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E5%8F%98%E5%8C%96%E5%B9%B6%E5%90%8C%E6%AD%A5/" data-id="clb3ncpxa0003i4ytd05sape0" data-title="Linux监听文件目录变化并同步" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/03/Linux%E7%9B%91%E5%90%AC%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E5%8F%98%E5%8C%96%E5%B9%B6%E5%90%8C%E6%AD%A5/" data-id="clb6idb3i0005joytgqc77fx5" data-title="Linux监听文件目录变化并同步" class="article-share-link">Teilen</a>
       
       
       
@@ -178,7 +267,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/11/23/%E6%8C%87%E6%95%B0%E5%AF%B9%E6%95%B0/" data-id="clb3ncpxg000bi4yt2j3220cv" data-title="指数对数" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2021/11/23/%E6%8C%87%E6%95%B0%E5%AF%B9%E6%95%B0/" data-id="clb6idb3q000ijoyt05nn31zk" data-title="指数对数" class="article-share-link">Teilen</a>
       
       
       
@@ -219,7 +308,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/11/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/" data-id="clb3ncpxu0011i4yt3owibov6" data-title="数据结构与算法学习路径" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2021/11/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/" data-id="clb6idb400017joytblqsf6ot" data-title="数据结构与算法学习路径" class="article-share-link">Teilen</a>
       
       
       
@@ -315,7 +404,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/11/12/%E9%A1%B9%E7%9B%AE%E5%85%B3%E9%94%AE%E8%8A%82%E7%82%B9%E5%BA%94%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88/" data-id="clb3ncpyd002ni4yt9m2wa8el" data-title="项目关键节点应该做什么" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2021/11/12/%E9%A1%B9%E7%9B%AE%E5%85%B3%E9%94%AE%E8%8A%82%E7%82%B9%E5%BA%94%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88/" data-id="clb6idb4g002sjoyt8xf97mcs" data-title="项目关键节点应该做什么" class="article-share-link">Teilen</a>
       
       
       
@@ -364,7 +453,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/10/19/Hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="clb3ncpx70001i4yt5f4s8adu" data-title="Hexo常用命令" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2021/10/19/Hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="clb6idb380000joyt2cn56u8r" data-title="Hexo常用命令" class="article-share-link">Teilen</a>
       
       
       
@@ -440,7 +529,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/10/19/%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%8F%98%E9%87%8FThreadLocal/" data-id="clb3ncpxy001ai4ytehk3gc6k" data-title="线程本地变量ThreadLocal" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2021/10/19/%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%8F%98%E9%87%8FThreadLocal/" data-id="clb6idb42001bjoyt2wjyc40d" data-title="线程本地变量ThreadLocal" class="article-share-link">Teilen</a>
       
       
       
@@ -493,7 +582,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/09/28/Proxy%E4%BB%A3%E7%90%86%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" data-id="clb3ncpx00000i4ytgza06sbl" data-title="Proxy代理代码示例" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2021/09/28/Proxy%E4%BB%A3%E7%90%86%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" data-id="clb6idb3j0008joytcsl8a6ds" data-title="Proxy代理代码示例" class="article-share-link">Teilen</a>
       
       
       
@@ -541,7 +630,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/09/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E5%99%A8/" data-id="clb3ncpxz001fi4yt2utbedwp" data-title="设计模式-装饰器" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2021/09/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E5%99%A8/" data-id="clb6idb43001gjoytbtycateg" data-title="设计模式-装饰器" class="article-share-link">Teilen</a>
       
       
       
@@ -606,7 +695,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/09/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%B7%A5%E5%8E%82/" data-id="clb3ncpxy001ci4ytcr29dpbn" data-title="设计模式-工厂" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2021/09/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%B7%A5%E5%8E%82/" data-id="clb6idb45001ijoyt9l9hbsw8" data-title="设计模式-工厂" class="article-share-link">Teilen</a>
       
       
       
@@ -620,90 +709,11 @@
 
 
   
-    <article id="post-线程状态、切换、创建" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/09/13/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E3%80%81%E5%88%87%E6%8D%A2%E3%80%81%E5%88%9B%E5%BB%BA/" class="article-date">
-  <time class="dt-published" datetime="2021-09-13T02:41:58.000Z" itemprop="datePublished">2021-09-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/09/13/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E3%80%81%E5%88%87%E6%8D%A2%E3%80%81%E5%88%9B%E5%BB%BA/">线程状态、切换、创建</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="线程状态、切换、创建"><a href="#线程状态、切换、创建" class="headerlink" title="线程状态、切换、创建"></a>线程状态、切换、创建</h3><ol>
-<li><p>线程状态</p>
-<ul>
-<li>New，新建</li>
-<li>Runnable，可运行状态</li>
-<li>Running，运行中</li>
-<li>Block，阻塞中。分为释放锁和不释放锁的阻塞</li>
-<li>Terminal，结束</li>
-</ul>
-</li>
-<li><p>线程切换 </p>
-<ul>
-<li>Thread 静态方法<ul>
-<li>sleep(), 当前线程停止，不释放锁。</li>
-<li>yield(), 当前线程让出CPU时间片进入可运行状态从新竞争获取CPU时间片</li>
-</ul>
-</li>
-<li>Thread对象方法<ul>
-<li>join(), 当前线程等待join()线程结束后再继续，不释放锁</li>
-</ul>
-</li>
-<li>Object方法<ul>
-<li>wait(), 等待并释放锁。</li>
-<li>notify(), notifyAll()，等待状态的线程重新进入Runable状态竞争CPU时间片。</li>
-<li>这几个方法需要在加锁的代码中执行，否则会异常。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>线程创建</p>
-<ul>
-<li>继承Thread</li>
-<li>实现Runnable</li>
-<li>实现Callable</li>
-<li>线程池</li>
-</ul>
-</li>
-</ol>
-<p>​    另附Java内存模型笔记<br>  <img src="http://assets.processon.com/chart_image/613ec0f11e08532eed69c0a0.png">  </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2021/09/13/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E3%80%81%E5%88%87%E6%8D%A2%E3%80%81%E5%88%9B%E5%BB%BA/" data-id="clb3ncpxx0017i4yt1ssseu4g" data-title="线程状态、切换、创建" class="article-share-link">Partager</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">Java并发编程</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Précédent</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Suivant &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; zurück</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">weiter &raquo;</a>
   </nav>
 
 </section>
@@ -715,7 +725,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" rel="tag">Java基础代码示例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">Java并发编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" rel="tag">工具使用笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" rel="tag">源码阅读</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9E%8E%E7%8E%A9/" rel="tag">瞎玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
     </div>
@@ -725,16 +735,16 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" style="font-size: 10px;">Java基础代码示例</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" style="font-size: 12.5px;">Java并发编程</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" style="font-size: 12.5px;">工具使用笔记</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 17.5px;">排序</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 10px;">源码阅读</a> <a href="/tags/%E7%9E%8E%E7%8E%A9/" style="font-size: 10px;">瞎玩</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 12.5px;">系统架构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 12.5px;">题解</a>
+      <a href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" style="font-size: 10px;">Java基础代码示例</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" style="font-size: 12.5px;">Java并发编程</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" style="font-size: 12.5px;">工具使用笔记</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 17.5px;">排序</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 10px;">源码阅读</a> <a href="/tags/%E7%9E%8E%E7%8E%A9/" style="font-size: 10px;">瞎玩</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 12.5px;">系统架构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 15px;">题解</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
     </div>
@@ -744,9 +754,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2022/12/02/LC%E9%A2%98%E8%A7%A3-%E5%B7%A6%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/">LC题解-左旋转字符串</a>
+          </li>
         
           <li>
             <a href="/2022/12/02/JDK%E7%9A%84Arrays-sort%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">JDK的Arrays.sort源码阅读</a>
@@ -764,10 +778,6 @@
             <a href="/2022/11/24/%E6%8E%92%E5%BA%8F-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">排序-归并排序</a>
           </li>
         
-          <li>
-            <a href="/2022/11/23/%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0%E9%A2%98%E8%A7%A3-%E6%91%A9%E5%B0%94%E6%8A%95%E7%A5%A8%E6%B3%95/">多数元素题解-摩尔投票法</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -782,7 +792,7 @@
     <div id="footer-info" class="inner">
       
       &copy; 2022 Avin Zhang<br>
-      Propulsé par <a href="https://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

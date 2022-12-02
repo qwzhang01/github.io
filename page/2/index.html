@@ -64,12 +64,12 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Rechercher"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
       </div>
     </div>
   </div>
@@ -77,6 +77,53 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-排序-时间复杂度n的2次方汇总" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6n%E7%9A%842%E6%AC%A1%E6%96%B9%E6%B1%87%E6%80%BB/" class="article-date">
+  <time class="dt-published" datetime="2022-11-18T03:13:48.000Z" itemprop="datePublished">2022-11-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6n%E7%9A%842%E6%AC%A1%E6%96%B9%E6%B1%87%E6%80%BB/">排序-时间复杂度n的2次方汇总</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>    时间复杂度是O($n^2$)的排序算法有冒泡排序、选择排序、插入排序三种。</p>
+<h6 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h6><p>    两两比较，将大的往后移动即冒泡。</p>
+<p>    优化方案是如果不再比较，则剩余属于排序完成，则直接跳出循环；进一步的优化方案是每次比较只比较到上次比较的尾部。</p>
+<h6 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h6><p>    直接一个一个找最小的放至数组最前面。</p>
+<p>    优化方案是，每次找最小的和最大的，最小的放至最前面，最大的放至最后面，即二元排序。</p>
+<h6 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h6><p>    每次找最合适的位置，然后插入。实现方案包括交换法和移动法。交换即每次将要插入的与每个下标比较，如果小则交换；移动法不交换，将不符合的一个一个后移，直到找到合适的位置后放入。</p>
+<p>    其中冒泡排序和插入排序是稳定的排序算法，选择排序是不稳定的排序算法。时间复杂度都是O($n^2$)，空间复杂度都是O(1)。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6n%E7%9A%842%E6%AC%A1%E6%96%B9%E6%B1%87%E6%80%BB/" data-id="clb6idb3x000yjoyt33jkbj7f" data-title="排序-时间复杂度n的2次方汇总" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-排序-插入排序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
@@ -120,7 +167,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" data-id="clb3ncpxp000pi4yt2kjgas87" data-title="排序-插入排序" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" data-id="clb6idb3w000ujoyt7q4r1k9o" data-title="排序-插入排序" class="article-share-link">Teilen</a>
       
       
       
@@ -165,7 +212,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" data-id="clb3ncpxt000wi4yt1rnm52nb" data-title="排序-选择排序" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" data-id="clb6idb3y0013joyt0kcjga4j" data-title="排序-选择排序" class="article-share-link">Teilen</a>
       
       
       
@@ -222,7 +269,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" data-id="clb3ncpxj000fi4yt3sj5aqs2" data-title="排序-冒泡排序" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" data-id="clb6idb3s000ljoytex7r2ob3" data-title="排序-冒泡排序" class="article-share-link">Teilen</a>
       
       
       
@@ -269,7 +316,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/09/%E5%B0%B1%E6%98%AF%E7%8E%A9/" data-id="clb3ncpxh000di4yt2esn4m4h" data-title="就是玩" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/09/%E5%B0%B1%E6%98%AF%E7%8E%A9/" data-id="clb6idb3p000gjoytekfh82pz" data-title="就是玩" class="article-share-link">Teilen</a>
       
       
       
@@ -324,7 +371,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/08/%E5%93%88%E5%B8%8C%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="clb3ncpxb0004i4ytbvv12sa0" data-title="哈希表中的算法" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/08/%E5%93%88%E5%B8%8C%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="clb6idb3m000cjoyt6bm8flqz" data-title="哈希表中的算法" class="article-share-link">Teilen</a>
       
       
       
@@ -338,9 +385,9 @@
 
 
   
-    <article id="post-环形链表Ⅱ题解笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-LC题解-环形链表Ⅱ题解笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2022/11/08/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/" class="article-date">
+    <a href="/2022/11/08/LC%E9%A2%98%E8%A7%A3-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/" class="article-date">
   <time class="dt-published" datetime="2022-11-08T09:04:32.000Z" itemprop="datePublished">2022-11-08</time>
 </a>
     
@@ -352,7 +399,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/11/08/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/">环形链表Ⅱ题解笔记</a>
+      <a class="p-name article-title" href="/2022/11/08/LC%E9%A2%98%E8%A7%A3-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/">LC题解-环形链表Ⅱ题解笔记</a>
     </h1>
   
 
@@ -364,7 +411,7 @@
 <p>如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。如果 pos 是 -1，则在该链表中没有环。注意：pos 不作为参数进行传递，仅仅是为了标识链表的实际情况。</p>
 <p><strong>不允许修改 链表。</strong></p>
 <p><strong>示例</strong></p>
-<p><img src="/2022/11/08/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/1.png"></p>
+<p><img src="/2022/11/08/LC%E9%A2%98%E8%A7%A3-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/1.png"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [3,2,0,-4], pos = 1</span><br><span class="line">输出：返回索引为 1 的链表节点</span><br><span class="line">解释：链表中有一个环，其尾部连接到第二个节点。</span><br></pre></td></tr></table></figure>
 
 <h5 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h5><p>    快慢指针，快指针一次移动2个，满慢指针一次移动1个，如果不是循环链表，则快指针的next会等于null。</p>
@@ -374,13 +421,13 @@
 <p>    x + y &#x3D; n * ( y + z)</p>
 <p>    x &#x3D; (n - 1)(y + z) + z    </p>
 <p>    根据等式，一个指针从相遇节点快出发，一个指针从头结点出发，在相遇节点出发的指针，一定通过循环(n - 1)圈以及z个节点的情况下，再次与头结点相遇。</p>
-<p><img src="/2022/11/08/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/2.gif"></p>
+<p><img src="/2022/11/08/LC%E9%A2%98%E8%A7%A3-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/2.gif"></p>
 <h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123;</span></span><br><span class="line"><span class="comment"> *         val = x;</span></span><br><span class="line"><span class="comment"> *         next = null;</span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">detectCycle</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="literal">null</span> || head.next == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">fast</span> <span class="operator">=</span> head.next.next;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">slow</span> <span class="operator">=</span> head.next;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(fast != <span class="literal">null</span> &amp;&amp; fast.next != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span>(fast == slow) &#123;</span><br><span class="line">                <span class="comment">// 第一次相遇</span></span><br><span class="line">                slow = head;</span><br><span class="line">                <span class="keyword">while</span>(slow != fast) &#123;</span><br><span class="line">                    slow = slow.next;</span><br><span class="line">                    fast = fast.next;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> slow;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                slow = slow.next;</span><br><span class="line">                fast = fast.next.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/08/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/" data-id="clb3ncpxw0015i4yt76h84lgu" data-title="环形链表Ⅱ题解笔记" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/08/LC%E9%A2%98%E8%A7%A3-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/" data-id="clb6idb3h0004joytfy1g9ehb" data-title="LC题解-环形链表Ⅱ题解笔记" class="article-share-link">Teilen</a>
       
       
       
@@ -453,7 +500,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/07/%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="clb3ncpyd002li4ytcy8j89pr" data-title="链表中的算法" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/07/%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="clb6idb4g002qjoyt8ru97vne" data-title="链表中的算法" class="article-share-link">Teilen</a>
       
       
       
@@ -523,7 +570,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/04/%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="clb3ncpxv0012i4ytbf5hbt50" data-title="数组中的算法" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/04/%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="clb6idb400018joytbcqc1vo8" data-title="数组中的算法" class="article-share-link">Teilen</a>
       
       
       
@@ -591,96 +638,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/03/%E4%B8%80%E8%87%B4%E6%80%A7hash%E7%AE%97%E6%B3%95/" data-id="clb3ncpxb0005i4ytgi5nb30p" data-title="一致性hash算法" class="article-share-link">Partager</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-大型网站页面静态化方案" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/" class="article-date">
-  <time class="dt-published" datetime="2022-11-03T04:15:15.000Z" itemprop="datePublished">2022-11-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/">大型网站页面静态化方案</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h5 id="为什么要静态化"><a href="#为什么要静态化" class="headerlink" title="为什么要静态化"></a>为什么要静态化</h5><ul>
-<li>提高访问性能</li>
-<li>SEO优化友好</li>
-</ul>
-<h5 id="方案一：网页HTML化"><a href="#方案一：网页HTML化" class="headerlink" title="方案一：网页HTML化"></a>方案一：网页HTML化</h5><p><img src="/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/%E5%9B%BE1.jpg"></p>
-<ul>
-<li>管理后台调用新闻服务创建文章成功后，发送消息到消息队列</li>
-<li>静态服务监听消息，把文章静态化，即生成html文件</li>
-<li>在静态服务器上面安装一个文件同步工具，此工具的功能可以做到只同步有变动的文件，做增量同步，rsync和inotifywait</li>
-<li>通过同步工具把html文件同步到所有的web服务器</li>
-</ul>
-<p><strong>缺点</strong></p>
-<ul>
-<li><p>页面无法修改</p>
-</li>
-<li><p>页面同步实时性不好，多台服务器不一定同时同步，负载均衡下刷新页面可能有是有内容有时又没有了</p>
-</li>
-<li><p>html文件太多，无法维护</p>
-</li>
-<li><p>同步工具不稳定</p>
-</li>
-</ul>
-<h5 id="方案二：伪静态化"><a href="#方案二：伪静态化" class="headerlink" title="方案二：伪静态化"></a>方案二：伪静态化</h5><p><img src="/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/%E6%A1%88%E5%9B%BE2.jpg"></p>
-<ul>
-<li><p>管理后台调用新闻服务创建文章成功后，发送消息到消息队列</p>
-</li>
-<li><p>缓存服务监听消息，把文章内容缓存到缓存服务器上面</p>
-</li>
-<li><p>用户发起请求，web服务器根据id，直接查询缓存服务器</p>
-</li>
-<li><p>获取数据返回给用户</p>
-</li>
-</ul>
-<p><strong>缺点</strong></p>
-<ul>
-<li><p>缓存压力大</p>
-</li>
-<li><p>缓存维护难度大</p>
-</li>
-</ul>
-<h5 id="方案三：布局样式模板化"><a href="#方案三：布局样式模板化" class="headerlink" title="方案三：布局样式模板化"></a>方案三：布局样式模板化</h5><p><img src="/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/%E5%9B%BE3.jpg"></p>
-<ul>
-<li><p>分发层做负载均衡，利用hash一致性进行分发</p>
-</li>
-<li><p>应用层利用openresty+lua，使用html模板和nginx级的缓存</p>
-</li>
-<li><p>缓存层：jvm缓存+redis分布式缓存</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/" data-id="clb3ncpxe0009i4ytcomc88od" data-title="大型网站页面静态化方案" class="article-share-link">Partager</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/03/%E4%B8%80%E8%87%B4%E6%80%A7hash%E7%AE%97%E6%B3%95/" data-id="clb6idb3k000ajoyt1giafw5u" data-title="一致性hash算法" class="article-share-link">Teilen</a>
       
       
       
@@ -698,7 +656,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; Précédent</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Suivant &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">weiter &raquo;</a>
   </nav>
 
 </section>
@@ -710,7 +668,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" rel="tag">Java基础代码示例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">Java并发编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" rel="tag">工具使用笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" rel="tag">源码阅读</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9E%8E%E7%8E%A9/" rel="tag">瞎玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
     </div>
@@ -720,16 +678,16 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" style="font-size: 10px;">Java基础代码示例</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" style="font-size: 12.5px;">Java并发编程</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" style="font-size: 12.5px;">工具使用笔记</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 17.5px;">排序</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 10px;">源码阅读</a> <a href="/tags/%E7%9E%8E%E7%8E%A9/" style="font-size: 10px;">瞎玩</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 12.5px;">系统架构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 12.5px;">题解</a>
+      <a href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" style="font-size: 10px;">Java基础代码示例</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" style="font-size: 12.5px;">Java并发编程</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" style="font-size: 12.5px;">工具使用笔记</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 17.5px;">排序</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 10px;">源码阅读</a> <a href="/tags/%E7%9E%8E%E7%8E%A9/" style="font-size: 10px;">瞎玩</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 12.5px;">系统架构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 15px;">题解</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
     </div>
@@ -739,9 +697,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2022/12/02/LC%E9%A2%98%E8%A7%A3-%E5%B7%A6%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/">LC题解-左旋转字符串</a>
+          </li>
         
           <li>
             <a href="/2022/12/02/JDK%E7%9A%84Arrays-sort%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">JDK的Arrays.sort源码阅读</a>
@@ -759,10 +721,6 @@
             <a href="/2022/11/24/%E6%8E%92%E5%BA%8F-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">排序-归并排序</a>
           </li>
         
-          <li>
-            <a href="/2022/11/23/%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0%E9%A2%98%E8%A7%A3-%E6%91%A9%E5%B0%94%E6%8A%95%E7%A5%A8%E6%B3%95/">多数元素题解-摩尔投票法</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -777,7 +735,7 @@
     <div id="footer-info" class="inner">
       
       &copy; 2022 Avin Zhang<br>
-      Propulsé par <a href="https://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
