@@ -64,12 +64,12 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Rechercher"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
       </div>
     </div>
   </div>
@@ -77,6 +77,62 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-排序-插入排序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time class="dt-published" datetime="2022-11-18T03:12:48.000Z" itemprop="datePublished">2022-11-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">排序-插入排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p> 插入排序的思想非常简单，生活中有一个很常见的场景：在打扑克牌时，我们一边抓牌一边给扑克牌排序，每次摸一张牌，就将它插入手上已有的牌中合适的位置，逐渐完成整个排序。</p>
+<p>    插入排序有两种写法：</p>
+<ul>
+<li><p>交换法：在新数字插入过程中，不断与前面的数字交换，直到找到自己合适的位置。</p>
+</li>
+<li><p>移动法：在新数字插入过程中，与前面的数字不断比较，前面的数字不断向后挪出位置，当新数字找到自己的位置后，插入一次即可。</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 交换法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">insertSort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="comment">// 从第二个数开始，往前插入数字</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="comment">// j 记录当前数字下标</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i;</span><br><span class="line">        <span class="comment">// 当前数字比前一个数字小，则将当前数字与前一个数字交换</span></span><br><span class="line">        <span class="keyword">while</span> (j &gt;= <span class="number">1</span> &amp;&amp; arr[j] &lt; arr[j - <span class="number">1</span>]) &#123;</span><br><span class="line">            swap(arr, j, j - <span class="number">1</span>);</span><br><span class="line">            <span class="comment">// 更新当前数字下标</span></span><br><span class="line">            j--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> i, <span class="type">int</span> j)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> arr[i];</span><br><span class="line">    arr[i] = arr[j];</span><br><span class="line">    arr[j] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 移动法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">insertSort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="comment">// 从第二个数开始，往前插入数字</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">currentNumber</span> <span class="operator">=</span> arr[i];</span><br><span class="line">        <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i - <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 寻找插入位置的过程中，不断地将比 currentNumber 大的数字向后挪</span></span><br><span class="line">        <span class="keyword">while</span> (j &gt;= <span class="number">0</span> &amp;&amp; currentNumber &lt; arr[j]) &#123;</span><br><span class="line">            arr[j + <span class="number">1</span>] = arr[j];</span><br><span class="line">            j--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 两种情况会跳出循环：1. 遇到一个小于或等于 currentNumber 的数字，跳出循环，currentNumber 就坐到它后面。</span></span><br><span class="line">        <span class="comment">// 2. 已经走到数列头部，仍然没有遇到小于或等于 currentNumber 的数字，也会跳出循环，此时 j 等于 -1，currentNumber 就坐到数列头部。</span></span><br><span class="line">        arr[j + <span class="number">1</span>] = currentNumber;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>    插入排序时间复杂度O($n^2$)，空间复杂度O(1)。</p>
+<p>    插入排序是稳定的排序算法。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" data-id="clb3ncpxp000pi4yt2kjgas87" data-title="排序-插入排序" class="article-share-link">Partager</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-排序-选择排序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
@@ -109,7 +165,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" data-id="clb3ncpxt000wi4yt1rnm52nb" data-title="排序-选择排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" data-id="clb3ncpxt000wi4yt1rnm52nb" data-title="排序-选择排序" class="article-share-link">Partager</a>
       
       
       
@@ -166,7 +222,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" data-id="clb3ncpxj000fi4yt3sj5aqs2" data-title="排序-冒泡排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" data-id="clb3ncpxj000fi4yt3sj5aqs2" data-title="排序-冒泡排序" class="article-share-link">Partager</a>
       
       
       
@@ -213,7 +269,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/09/%E5%B0%B1%E6%98%AF%E7%8E%A9/" data-id="clb3ncpxh000di4yt2esn4m4h" data-title="就是玩" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/09/%E5%B0%B1%E6%98%AF%E7%8E%A9/" data-id="clb3ncpxh000di4yt2esn4m4h" data-title="就是玩" class="article-share-link">Partager</a>
       
       
       
@@ -268,7 +324,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/08/%E5%93%88%E5%B8%8C%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="clb3ncpxb0004i4ytbvv12sa0" data-title="哈希表中的算法" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/08/%E5%93%88%E5%B8%8C%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="clb3ncpxb0004i4ytbvv12sa0" data-title="哈希表中的算法" class="article-share-link">Partager</a>
       
       
       
@@ -324,7 +380,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/08/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/" data-id="clb3ncpxw0015i4yt76h84lgu" data-title="环形链表Ⅱ题解笔记" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/08/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/" data-id="clb3ncpxw0015i4yt76h84lgu" data-title="环形链表Ⅱ题解笔记" class="article-share-link">Partager</a>
       
       
       
@@ -397,7 +453,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/07/%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="clb3ncpyd002li4ytcy8j89pr" data-title="链表中的算法" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/07/%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="clb3ncpyd002li4ytcy8j89pr" data-title="链表中的算法" class="article-share-link">Partager</a>
       
       
       
@@ -467,7 +523,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/04/%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="clb3ncpxv0012i4ytbf5hbt50" data-title="数组中的算法" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/04/%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="clb3ncpxv0012i4ytbf5hbt50" data-title="数组中的算法" class="article-share-link">Partager</a>
       
       
       
@@ -535,7 +591,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/03/%E4%B8%80%E8%87%B4%E6%80%A7hash%E7%AE%97%E6%B3%95/" data-id="clb3ncpxb0005i4ytgi5nb30p" data-title="一致性hash算法" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/03/%E4%B8%80%E8%87%B4%E6%80%A7hash%E7%AE%97%E6%B3%95/" data-id="clb3ncpxb0005i4ytgi5nb30p" data-title="一致性hash算法" class="article-share-link">Partager</a>
       
       
       
@@ -624,7 +680,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/" data-id="clb3ncpxe0009i4ytcomc88od" data-title="大型网站页面静态化方案" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/03/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96%E6%96%B9%E6%A1%88/" data-id="clb3ncpxe0009i4ytcomc88od" data-title="大型网站页面静态化方案" class="article-share-link">Partager</a>
       
       
       
@@ -638,68 +694,11 @@
 
 
   
-    <article id="post-Linux监听文件目录变化并同步" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/11/03/Linux%E7%9B%91%E5%90%AC%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E5%8F%98%E5%8C%96%E5%B9%B6%E5%90%8C%E6%AD%A5/" class="article-date">
-  <time class="dt-published" datetime="2022-11-03T02:53:25.000Z" itemprop="datePublished">2022-11-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/11/03/Linux%E7%9B%91%E5%90%AC%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E5%8F%98%E5%8C%96%E5%B9%B6%E5%90%8C%E6%AD%A5/">Linux监听文件目录变化并同步</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>    大型高并发的CMS新闻网站为了访问性能以及SEO，一般采用页面静态化方案。</p>
-<p>    静态化方案指由一个服务将新的内容静态化为HTML文件，web服务器直接将静态HTML提供给浏览器，不经过数据库或内存计算。</p>
-<p>    </p>
-<p>    页面静态化中，需要将新生成的HTML同步给分布式的服务器，此时会用到文件目录监听工具和同步工具。最常用的是rsync和inotifywait。inotifywait监控文件夹变化；rsync同步变化的文件内容，可同步到本机的其他目录或者远程服务器上。</p>
-<h4 id="安装-rsync"><a href="#安装-rsync" class="headerlink" title="安装 rsync"></a>安装 rsync</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://rsync.samba.org/ftp/rsync/src/rsync-3.1.1.tar.gz</span><br><span class="line">tar zxvf rsync-3.1.1.tar.gz </span><br><span class="line">./configure –prefix=/usr/local/rsync-3.1.1</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="安装-inotifywait"><a href="#安装-inotifywait" class="headerlink" title="安装 inotifywait"></a>安装 inotifywait</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget http://github.com/downloads/rvoicilas/inotify-tools/inotify-tools-3.14.tar.gz</span><br><span class="line">tar zxvf inotify-tools-3.14.tar.gz</span><br><span class="line">cd inotify-tools-3.14</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="创建并运行脚本"><a href="#创建并运行脚本" class="headerlink" title="创建并运行脚本"></a>创建并运行脚本</h4><p>    新建脚本 inotifywait.sh</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">监控的路径</span></span><br><span class="line">export CNROMS_SRC=/home/ftpuser/gri/</span><br><span class="line">inotifywait --exclude &#x27;\.(part|swp)&#x27; -r -mq -e  modify,move_self,create,delete,move,close_write $CNROMS_SRC |</span><br><span class="line">  while read event;</span><br><span class="line">    do</span><br><span class="line">    rsync -vazu --progress  --password-file=/etc/rsyncd_rsync.secret  /home/ftpuser/gri/sla  rsync@10.208.1.1::gri ##这里执行同步的命令，可以改为其他的命令</span><br><span class="line"></span><br><span class="line">  done</span><br></pre></td></tr></table></figure>
-
-<p>    启动脚本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup sh inotifywait.sh &gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/03/Linux%E7%9B%91%E5%90%AC%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E5%8F%98%E5%8C%96%E5%B9%B6%E5%90%8C%E6%AD%A5/" data-id="clb3ncpxa0003i4ytd05sape0" data-title="Linux监听文件目录变化并同步" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" rel="tag">工具使用笔记</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">weiter &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; Précédent</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Suivant &raquo;</a>
   </nav>
 
 </section>
@@ -711,9 +710,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" rel="tag">Java基础代码示例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">Java并发编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" rel="tag">工具使用笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9E%8E%E7%8E%A9/" rel="tag">瞎玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" rel="tag">Java基础代码示例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">Java并发编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" rel="tag">工具使用笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" rel="tag">源码阅读</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9E%8E%E7%8E%A9/" rel="tag">瞎玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
     </div>
   </div>
 
@@ -721,18 +720,18 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" style="font-size: 10px;">Java基础代码示例</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" style="font-size: 12.5px;">Java并发编程</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" style="font-size: 12.5px;">工具使用笔记</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 17.5px;">排序</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E7%9E%8E%E7%8E%A9/" style="font-size: 10px;">瞎玩</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 12.5px;">系统架构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 12.5px;">题解</a>
+      <a href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" style="font-size: 10px;">Java基础代码示例</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" style="font-size: 12.5px;">Java并发编程</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" style="font-size: 12.5px;">工具使用笔记</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 17.5px;">排序</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 10px;">源码阅读</a> <a href="/tags/%E7%9E%8E%E7%8E%A9/" style="font-size: 10px;">瞎玩</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 12.5px;">系统架构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 12.5px;">题解</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
     </div>
   </div>
 
@@ -740,9 +739,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2022/12/02/JDK%E7%9A%84Arrays-sort%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">JDK的Arrays.sort源码阅读</a>
+          </li>
         
           <li>
             <a href="/2022/11/25/%E6%8E%92%E5%BA%8F-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E6%A1%B6%E6%8E%92%E5%BA%8F/">排序-计数排序、基数排序、桶排序</a>
@@ -760,10 +763,6 @@
             <a href="/2022/11/23/%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0%E9%A2%98%E8%A7%A3-%E6%91%A9%E5%B0%94%E6%8A%95%E7%A5%A8%E6%B3%95/">多数元素题解-摩尔投票法</a>
           </li>
         
-          <li>
-            <a href="/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%BF%AB%E6%8E%92/">排序-快排</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -778,7 +777,7 @@
     <div id="footer-info" class="inner">
       
       &copy; 2022 Avin Zhang<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+      Propulsé par <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
