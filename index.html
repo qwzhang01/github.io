@@ -141,18 +141,18 @@
 <li><p>解密后是否会用到对象：会，解密即读库，读库一定是为了使用，因此解密后内存需为明文</p>
 </li>
 <li><p>加密后是否会用到对象：可能会，某些业务入库即结束，有些用户入库后可能还有进一步的业务，因此加密后内存中仍需保持明文。</p>
+<p>基于以上特征分析，可以采用mybatis的Interceptor拦截器或新定义类型使用TypeHandler处理。</p>
 </li>
 </ol>
-<p>  基于以上特征分析，可以采用mybatis的Interceptor拦截器或新定义类型使用TypeHandler处理。</p>
 <h6 id="mybatis-拦截器"><a href="#mybatis-拦截器" class="headerlink" title="mybatis 拦截器"></a>mybatis 拦截器</h6><ol>
 <li><p>加密：预先对入参类通过继承基类或注解添加加密标识，拦截setParameters，获取入参对象，获取到标记为需要加密的字段，对字段内容进行加密 </p>
 </li>
 <li><p>解密：预先对结果类通过继承基类或注解添加解密标识，拦截handleResultSets，获取查询结果对象，获取需要解密的字段，对字段进行解密</p>
 </li>
 <li><p>缺点：加密后会将入参对象字段改为密文，影响后续使用，需要在入库的同时再操作一次读库以保证内存中一直是明文</p>
+<p>mybatis拦截器解密存在瑕疵，加密后需特殊处理，不建议使用，因此不再罗列该方案demo代码。</p>
 </li>
 </ol>
-<p>  mybatis拦截器解密存在瑕疵，加密后需特殊处理，不建议使用，因此不再罗列该方案demo代码。</p>
 <h6 id="新定义类型通过TypeHandler处理思路"><a href="#新定义类型通过TypeHandler处理思路" class="headerlink" title="新定义类型通过TypeHandler处理思路"></a>新定义类型通过TypeHandler处理思路</h6><ol>
 <li><p>TypeHandler在mybatis中用于实现java类型和JDBC类型的相互转换。mybatis使用prepareStatement进行参数设置的时候，通过typeHandler将传入的java类型参数转换成对应的JDBC类型参数，这个过程是通过调用PrepareStatement不同的set方法实现的；在获取结果返回之后，需将返回的结果的JDBC类型转换成java类型，通过调用ResultSet对象不同类型的get方法实现；所以不同类型的typeHandler其实就是调用PrepareStatement和ResultSet的不同方法来进行类型的转换，因此可以在调用PrepareStatement和ResultSet的相关方法之前可以对传入的参数进行处理</p>
 </li>
@@ -173,8 +173,6 @@
 <p>     使用举例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用户 entity</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@TableName(&quot;user&quot;)</span></span><br><span class="line"><span class="meta">@EncryptObj</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="meta">@TableId(value = &quot;id&quot;, type = IdType.ASSIGN_ID)</span></span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="meta">@TableField(&quot;name&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 使用拦截器方式加密</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@EncryptField</span></span><br><span class="line">    <span class="meta">@TableField(&quot;phoneNo&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String phoneNo;</span><br><span class="line">    <span class="meta">@TableField(&quot;gender&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String gender;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 使用类型转换器加密解密</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@TableField(&quot;idNo&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Encrypt idNo;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用户dto</span></span><br><span class="line"><span class="comment"> * 继承父类，需要做脱敏处理</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDto</span> <span class="keyword">extends</span> <span class="title class_">UnSensitiveDto</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 对手机号码做脱敏的主机，脱敏算法是手机号码</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@UnSensitive(type = UN_SENSITIVE_PHONE)</span></span><br><span class="line">    <span class="keyword">private</span> String phoneNo;</span><br><span class="line">    <span class="keyword">private</span> String gender;</span><br><span class="line">    <span class="keyword">private</span> Encrypt idNo;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 保存，保存后还需要使用</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> userDto</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PostMapping(&quot;save-error&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> R&lt;UserDto&gt; <span class="title function_">saveError</span><span class="params">(<span class="meta">@RequestBody</span> UserDto userDto)</span> &#123;</span><br><span class="line">        <span class="comment">// 保存</span></span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">        BeanUtils.copyProperties(userDto, user);</span><br><span class="line">        mapper.insert(user);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 使用</span></span><br><span class="line">        BeanUtils.copyProperties(user, userDto);</span><br><span class="line">        <span class="keyword">return</span> R.success(userDto);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-
-
 <p>    加密效果：<br><img src="/2022/12/09/SpringBoot%E4%B8%8EMybatis%E4%B8%8B%E5%AD%97%E6%AE%B5%E8%84%B1%E6%95%8F%E3%80%81%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E9%9D%9E%E4%BE%B5%E5%85%A5%E6%80%A7%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/.%5CSpringBoot%E4%B8%8EMybatis%E4%B8%8B%E5%AD%97%E6%AE%B5%E8%84%B1%E6%95%8F%E3%80%81%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E9%9D%9E%E4%BE%B5%E5%85%A5%E6%80%A7%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%5C2.png"><br><img src="/2022/12/09/SpringBoot%E4%B8%8EMybatis%E4%B8%8B%E5%AD%97%E6%AE%B5%E8%84%B1%E6%95%8F%E3%80%81%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E9%9D%9E%E4%BE%B5%E5%85%A5%E6%80%A7%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/.%5CSpringBoot%E4%B8%8EMybatis%E4%B8%8B%E5%AD%97%E6%AE%B5%E8%84%B1%E6%95%8F%E3%80%81%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E9%9D%9E%E4%BE%B5%E5%85%A5%E6%80%A7%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%5C3.png"></p>
 <h5 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h5><ol>
 <li><p>页面字段脱敏利用spring mvc 的ResponseBodyAdvice，在返回结果前改变对象为密文</p>
@@ -187,7 +185,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/12/09/SpringBoot%E4%B8%8EMybatis%E4%B8%8B%E5%AD%97%E6%AE%B5%E8%84%B1%E6%95%8F%E3%80%81%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E9%9D%9E%E4%BE%B5%E5%85%A5%E6%80%A7%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/" data-id="clbgeezn2002xvoyt7iz3h9q0" data-title="SpringBoot与Mybatis下字段脱敏、加密解密非侵入性实现方式" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/12/09/SpringBoot%E4%B8%8EMybatis%E4%B8%8B%E5%AD%97%E6%AE%B5%E8%84%B1%E6%95%8F%E3%80%81%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E9%9D%9E%E4%BE%B5%E5%85%A5%E6%80%A7%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/" data-id="clbgegaku002wjoyt2o3jfma7" data-title="SpringBoot与Mybatis下字段脱敏、加密解密非侵入性实现方式" class="article-share-link">Teilen</a>
       
       
       
@@ -237,7 +235,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/12/02/LC%E9%A2%98%E8%A7%A3-%E5%B7%A6%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-id="clbgeezlx0003voytdprk8jul" data-title="LC题解-左旋转字符串" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/12/02/LC%E9%A2%98%E8%A7%A3-%E5%B7%A6%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-id="clbgegajo0003joyt553nb1r7" data-title="LC题解-左旋转字符串" class="article-share-link">Teilen</a>
       
       
       
@@ -316,7 +314,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/12/02/JDK%E7%9A%84Arrays-sort%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" data-id="clbgeezn2002vvoyth79vbf77" data-title="JDK的Arrays.sort源码阅读" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/12/02/JDK%E7%9A%84Arrays-sort%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" data-id="clbgegakt002ujoytcavwdt8v" data-title="JDK的Arrays.sort源码阅读" class="article-share-link">Teilen</a>
       
       
       
@@ -408,7 +406,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/25/%E6%8E%92%E5%BA%8F-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E6%A1%B6%E6%8E%92%E5%BA%8F/" data-id="clbgeezmg0011voytaoo8exeg" data-title="排序-计数排序、基数排序、桶排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/25/%E6%8E%92%E5%BA%8F-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E6%A1%B6%E6%8E%92%E5%BA%8F/" data-id="clbgegak80011joyt3sd34oco" data-title="排序-计数排序、基数排序、桶排序" class="article-share-link">Teilen</a>
       
       
       
@@ -487,7 +485,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/25/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6O%EF%BC%88nlongn%EF%BC%89%E6%B1%87%E6%80%BB/" data-id="clbgeezme000wvoyt1v9wdnhv" data-title="排序-时间复杂度O（nlongn）汇总" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/25/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6O%EF%BC%88nlongn%EF%BC%89%E6%B1%87%E6%80%BB/" data-id="clbgegak6000yjoyt971r0may" data-title="排序-时间复杂度O（nlongn）汇总" class="article-share-link">Teilen</a>
       
       
       
@@ -547,7 +545,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/24/%E6%8E%92%E5%BA%8F-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" data-id="clbgeezmb000qvoytbpwh1p60" data-title="排序-归并排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/24/%E6%8E%92%E5%BA%8F-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" data-id="clbgegak3000qjoytgddychw8" data-title="排序-归并排序" class="article-share-link">Teilen</a>
       
       
       
@@ -597,7 +595,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/23/LC%E9%A2%98%E8%A7%A3-%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0%E9%A2%98%E8%A7%A3-%E6%91%A9%E5%B0%94%E6%8A%95%E7%A5%A8%E6%B3%95/" data-id="clbgeezlu0001voyt1a1mbm75" data-title="LC题解-多数元素题解-摩尔投票法" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/23/LC%E9%A2%98%E8%A7%A3-%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0%E9%A2%98%E8%A7%A3-%E6%91%A9%E5%B0%94%E6%8A%95%E7%A5%A8%E6%B3%95/" data-id="clbgegajl0001joyt9acz3680" data-title="LC题解-多数元素题解-摩尔投票法" class="article-share-link">Teilen</a>
       
       
       
@@ -676,7 +674,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%BF%AB%E6%8E%92/" data-id="clbgeezmc000tvoyt5ipx0bbu" data-title="排序-快排" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%BF%AB%E6%8E%92/" data-id="clbgegak4000tjoyta9q824uw" data-title="排序-快排" class="article-share-link">Teilen</a>
       
       
       
@@ -760,7 +758,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%A0%86%E6%8E%92%E5%BA%8F/" data-id="clbgeezm9000mvoyt0quihffo" data-title="排序-堆排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%A0%86%E6%8E%92%E5%BA%8F/" data-id="clbgegak1000mjoytcyo03q6m" data-title="排序-堆排序" class="article-share-link">Teilen</a>
       
       
       
@@ -882,7 +880,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5/" data-id="clbgeezmh0014voytgcyk1v82" data-title="数据结构-树的概念" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5/" data-id="clbgegak90014joyt1qr3bfr0" data-title="数据结构-树的概念" class="article-share-link">Teilen</a>
       
       
       
