@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>字符串算法-KML算法详解 | Avin技术笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="KML 算法用来处理字符串匹配的问题。核心思想是当出现字符串不匹配时，根据之前已经匹配的文本内容，避免从头再去做匹配。 举例：字符串，原始字符串，模式串是否属于字符串的一部分；模式串，字符串的子串，用来匹配的。对应字符串与模式串如下：字符串：aabaabaafa模式串：aabaaf暴力破解方式为2层循环，一个字符一个字符交替进行匹配，此时时间复杂度为 n * m。使用KML算法匹配，从第一个开始匹">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符串算法-KML算法详解">
+<meta property="og:url" content="https://qwzhang01.github.io/2023/01/11/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%97%E6%B3%95-KML%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Avin技术笔记">
+<meta property="og:description" content="KML 算法用来处理字符串匹配的问题。核心思想是当出现字符串不匹配时，根据之前已经匹配的文本内容，避免从头再去做匹配。 举例：字符串，原始字符串，模式串是否属于字符串的一部分；模式串，字符串的子串，用来匹配的。对应字符串与模式串如下：字符串：aabaabaafa模式串：aabaaf暴力破解方式为2层循环，一个字符一个字符交替进行匹配，此时时间复杂度为 n * m。使用KML算法匹配，从第一个开始匹">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-01-11T06:50:10.000Z">
+<meta property="article:modified_time" content="2023-01-11T08:20:10.212Z">
+<meta property="article:author" content="Avin Zhang">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="字符串">
+<meta property="article:tag" content="KML">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Avin技术笔记" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Avin技术笔记</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Avin技术笔记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-字符串算法-KML算法详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/11/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%97%E6%B3%95-KML%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/" class="article-date">
+  <time class="dt-published" datetime="2023-01-11T06:50:10.000Z" itemprop="datePublished">2023-01-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      字符串算法-KML算法详解
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>KML 算法用来处理字符串匹配的问题。核心思想是当出现字符串不匹配时，根据之前已经匹配的文本内容，避免从头再去做匹配。</p>
+<h4 id="举例："><a href="#举例：" class="headerlink" title="举例："></a>举例：</h4><p>字符串，原始字符串，模式串是否属于字符串的一部分；<br>模式串，字符串的子串，用来匹配的。<br>对应字符串与模式串如下：<br>字符串：aabaabaafa<br>模式串：aabaaf<br>暴力破解方式为2层循环，一个字符一个字符交替进行匹配，此时时间复杂度为 n * m。<br>使用KML算法匹配，从第一个开始匹配，匹配到b !&#x3D; f的时候，不是从头开始匹配，而是从模式串的b开始往后匹配，可以一直匹配的末尾，字符串匹配到最后一个的下标减模式串的长度（8-6&#x3D;2），即是结果</p>
+<h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>能更清晰说明白KML算法，需要厘清几个概念</p>
+<ul>
+<li>前缀：包含首字母，不包含尾字母的所有子串</li>
+<li>后缀：包含尾字母，不包含首字母的所有子串</li>
+<li>最长相当前后缀：字符串的前缀后缀相当的子串中，最长的子串</li>
+<li>next数组：存放遇到冲突后，回退下标，计算方式为最长相当前后缀长度</li>
+</ul>
+<h4 id="next数组"><a href="#next数组" class="headerlink" title="next数组"></a>next数组</h4><ul>
+<li>赋值内容：直接存最长相当前后缀长度，开头存负一整体右移，最长相当前后缀减一</li>
+<li>计算逻辑：<ul>
+<li>从第一个子串开始逐个循环</li>
+<li>前一位子串的最长相当前后缀的基础上分析，当前子串的最后一位&#x3D;前一个最长相当前后缀长度所在下标的字符，则当前子串的最长相当前后缀加一，因为前面的在上一步已经判断过了</li>
+<li>当前子串的最后一位 !&#x3D; 前一个最长相当前后缀长度所在下标的字符，因为上一个最长相当前后缀可知前面的比较结果已经知道了，所以不用全部回退，只需要找到前一个下标的next数组中的最长前档前后缀的长度，回退到那个位置继续比较，直到相当或到头，记录最长相当前后缀在next当前的下标</li>
+</ul>
+</li>
+<li>方便理解的几个模式串例子：aabaaf-010120、afbafaf-0001212、afbafafbafcaf-0001212345012</li>
+</ul>
+<h4 id="实现示例"><a href="#实现示例" class="headerlink" title="实现示例"></a>实现示例</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 练习KML算法</span><br><span class="line"> *</span><br><span class="line"> * @param haystack</span><br><span class="line"> * @param needle</span><br><span class="line"> * @return</span><br><span class="line"> */</span><br><span class="line">public int strStr(String haystack, String needle) &#123;</span><br><span class="line">    if (needle.length() == 0 || needle.length() &gt; haystack.length()) &#123;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    char[] cHaystack = haystack.toCharArray();</span><br><span class="line">    char[] cNeedle = needle.toCharArray();</span><br><span class="line"></span><br><span class="line">    // 计算next数组</span><br><span class="line">    // next 数组是模式串的最长相当前后缀的长度组成的数组</span><br><span class="line">    // 前缀表：包含首字母，不包含尾字母的所有子串</span><br><span class="line">    // 后缀表：包含尾字母，不包含首字母的所有子串</span><br><span class="line">    // 最长相当前后缀：字符串的前缀表中与后缀表相当的子串中，最长的那个子串</span><br><span class="line">    int[] next = getNext(cNeedle);</span><br><span class="line"></span><br><span class="line">    int i = 0;</span><br><span class="line">    int j = 0;</span><br><span class="line"></span><br><span class="line">    while (i &lt; cHaystack.length) &#123;</span><br><span class="line">        while (i &lt; cHaystack.length &amp;&amp; cHaystack[i] == cNeedle[j]) &#123;</span><br><span class="line">            if (j == cNeedle.length - 1) &#123;</span><br><span class="line">                return i - j;</span><br><span class="line">            &#125;</span><br><span class="line">            j++;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        if (j == 0) &#123;</span><br><span class="line">            i++;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            int preNextLen = next[j - 1];</span><br><span class="line">            j = preNextLen;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private int[] getNext(char[] neddle) &#123;</span><br><span class="line">    int[] next = new int[neddle.length];</span><br><span class="line"></span><br><span class="line">    int j = 0;</span><br><span class="line">    next[0] = j;</span><br><span class="line"></span><br><span class="line">    for (int i = 1; i &lt; neddle.length; i++) &#123;</span><br><span class="line">        while (j &gt; 0 &amp;&amp; neddle[j] != neddle[i]) &#123;</span><br><span class="line">            // 原则是，比较过的不比较</span><br><span class="line">            // 最长公共前后缀值得是该串的前后缀相当，当前冲突，对于前面的串不需要回退到第一个，</span><br><span class="line">            // 只需要回退到公共前缀的末尾，如果不冲突，就出来结果了，如果还是冲突，则继续回退</span><br><span class="line">            j = next[j - 1];</span><br><span class="line">        &#125;</span><br><span class="line">        if (j &gt;= 0 &amp;&amp; j != i &amp;&amp; neddle[j] == neddle[i]) &#123;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        next[i] = j;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return next;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qwzhang01.github.io/2023/01/11/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%97%E6%B3%95-KML%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/" data-id="clcre6ka7000gdgyt4f4udrox" data-title="字符串算法-KML算法详解" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/KML/" rel="tag">KML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/12/09/SpringBoot%E4%B8%8EMybatis%E4%B8%8B%E5%AD%97%E6%AE%B5%E8%84%B1%E6%95%8F%E3%80%81%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E9%9D%9E%E4%BE%B5%E5%85%A5%E6%80%A7%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">SpringBoot与Mybatis下字段脱敏、加密解密非侵入性实现方式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" rel="tag">Java基础代码示例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">Java并发编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KML/" rel="tag">KML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" rel="tag">工具使用笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" rel="tag">源码阅读</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9E%8E%E7%8E%A9/" rel="tag">瞎玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" rel="tag">项目实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" style="font-size: 10px;">Java基础代码示例</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" style="font-size: 12.5px;">Java并发编程</a> <a href="/tags/KML/" style="font-size: 10px;">KML</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" style="font-size: 12.5px;">工具使用笔记</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 17.5px;">排序</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 10px;">源码阅读</a> <a href="/tags/%E7%9E%8E%E7%8E%A9/" style="font-size: 10px;">瞎玩</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 12.5px;">系统架构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">项目实践</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 15px;">题解</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/01/11/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%97%E6%B3%95-KML%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/">字符串算法-KML算法详解</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/09/SpringBoot%E4%B8%8EMybatis%E4%B8%8B%E5%AD%97%E6%AE%B5%E8%84%B1%E6%95%8F%E3%80%81%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E9%9D%9E%E4%BE%B5%E5%85%A5%E6%80%A7%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/">SpringBoot与Mybatis下字段脱敏、加密解密非侵入性实现方式</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/02/LC%E9%A2%98%E8%A7%A3-%E5%B7%A6%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/">LC题解-左旋转字符串</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/02/JDK%E7%9A%84Arrays-sort%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">JDK的Arrays.sort源码阅读</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/25/%E6%8E%92%E5%BA%8F-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E6%A1%B6%E6%8E%92%E5%BA%8F/">排序-计数排序、基数排序、桶排序</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Avin Zhang<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
