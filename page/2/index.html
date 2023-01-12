@@ -64,12 +64,12 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Buscar"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Buscar"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
       </div>
     </div>
   </div>
@@ -77,6 +77,90 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-排序-堆排序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%A0%86%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time class="dt-published" datetime="2022-11-22T06:27:11.000Z" itemprop="datePublished">2022-11-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%A0%86%E6%8E%92%E5%BA%8F/">排序-堆排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>    完全二叉树是叶子节点只能出现在最下层和次下层，且最下层的叶子节点集中在树的左部。</p>
+<p>    堆是有如下特点的完全二叉树</p>
+<ul>
+<li><p>根节点的值&gt;&#x3D;子节点的值，即大顶堆</p>
+</li>
+<li><p>根节点的值&lt;&#x3D;子节点的值，即小顶堆</p>
+</li>
+</ul>
+<p>    </p>
+<h5 id="构建大顶堆"><a href="#构建大顶堆" class="headerlink" title="构建大顶堆"></a>构建大顶堆</h5><ul>
+<li><p>从0开始，将每一个数字依次插入，一边插入一边调整堆的结构，使之满足大顶堆的要求</p>
+</li>
+<li><p>将整个数列试作完全二叉树，自底向上调整树的结构，使之满足大顶堆的要求</p>
+</li>
+</ul>
+<h5 id="建堆与堆化"><a href="#建堆与堆化" class="headerlink" title="建堆与堆化"></a>建堆与堆化</h5><ul>
+<li><p>建堆即构建堆</p>
+</li>
+<li><p>堆化是从当前位置开始调整数组使之满足堆的特征</p>
+</li>
+</ul>
+<h5 id="堆排序的过程"><a href="#堆排序的过程" class="headerlink" title="堆排序的过程"></a>堆排序的过程</h5><ul>
+<li><p>构建大顶堆</p>
+</li>
+<li><p>取出堆顶元素</p>
+</li>
+<li><p>调整剩余数字使之符合大顶堆特点</p>
+</li>
+<li><p>再次取出堆顶元素</p>
+</li>
+<li><p>循环往复</p>
+</li>
+</ul>
+<h5 id="完全二叉树的性质-根节点下标为0"><a href="#完全二叉树的性质-根节点下标为0" class="headerlink" title="完全二叉树的性质(根节点下标为0)"></a>完全二叉树的性质(根节点下标为0)</h5><ul>
+<li><p>下标i的左子节点下标：2 * i + 1</p>
+</li>
+<li><p>下表i的右子节点下标：左下标+1</p>
+</li>
+<li><p>最后一个非叶子节点下标：n&#x2F;2-1</p>
+</li>
+</ul>
+<h4 id="堆排序的复杂度分析"><a href="#堆排序的复杂度分析" class="headerlink" title="堆排序的复杂度分析"></a>堆排序的复杂度分析</h4><p>    堆排序的时间复杂度为O(n log n)，堆排序的空间复杂度为 O(1)。</p>
+<p>    时间复杂度分析由建堆和堆化两个，其中建堆的时间复杂度是O(n)，堆化的时间复杂度是O(n log n)</p>
+<h5 id="堆排序代码"><a href="#堆排序代码" class="headerlink" title="堆排序代码"></a>堆排序代码</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testHeapSort</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] arr = <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">6</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">4</span>&#125;;</span><br><span class="line">    buildMaxHeap(arr);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> arr.length - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        swap(arr, <span class="number">0</span>, i);</span><br><span class="line">        maxHeapify(arr, <span class="number">0</span>, i);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 构建大顶堆</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 我要成为亿万富翁</span></span><br><span class="line"><span class="comment"> * 我要财务自由</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">buildMaxHeap</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> arr.length / <span class="number">2</span> - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        maxHeapify(arr, i, arr.length);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 堆化</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 我要成为亿万富翁</span></span><br><span class="line"><span class="comment"> * 我要财务自由</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> i</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> size</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">maxHeapify</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> i, <span class="type">int</span> size)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">2</span> * i + <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> left + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">maxValue</span> <span class="operator">=</span> i;</span><br><span class="line">    <span class="keyword">if</span> (left &lt; size &amp;&amp; arr[left] &gt; arr[maxValue]) &#123;</span><br><span class="line">        maxValue = left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (right &lt; size &amp;&amp; arr[right] &gt; arr[maxValue]) &#123;</span><br><span class="line">        maxValue = right;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (maxValue != i) &#123;</span><br><span class="line">        swap(arr, i, maxValue);</span><br><span class="line">        maxHeapify(arr, maxValue, size);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 交换数组arr 下标 i j  的数据</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 我要成为亿万富翁</span></span><br><span class="line"><span class="comment"> * 我要财务自由</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> i</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> j</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> i, <span class="type">int</span> j)</span> &#123;</span><br><span class="line">    arr[i] = arr[i] ^ arr[j];</span><br><span class="line">    arr[j] = arr[j] ^ arr[i];</span><br><span class="line">    arr[i] = arr[i] ^ arr[j];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%A0%86%E6%8E%92%E5%BA%8F/" data-id="clcst9uw2000qpoyta0mt01uk" data-title="排序-堆排序" class="article-share-link">Compartir</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-数据结构-树的概念" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
@@ -186,7 +270,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5/" data-id="clcre6kap0017dgyth8fx2f5i" data-title="数据结构-树的概念" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5/" data-id="clcst9uwc0019poyta2bh9qs8" data-title="数据结构-树的概念" class="article-share-link">Compartir</a>
       
       
       
@@ -231,7 +315,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" data-id="clcre6kae000qdgyt0ms1ga2v" data-title="排序-希尔排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" data-id="clcst9uw4000tpoyt590y9mi0" data-title="排序-希尔排序" class="article-share-link">Compartir</a>
       
       
       
@@ -278,7 +362,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6n%E7%9A%842%E6%AC%A1%E6%96%B9%E6%B1%87%E6%80%BB/" data-id="clcre6kam0013dgyt9rp15xit" data-title="排序-时间复杂度n的2次方汇总" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6n%E7%9A%842%E6%AC%A1%E6%96%B9%E6%B1%87%E6%80%BB/" data-id="clcst9uw90012poyt21ij5aoj" data-title="排序-时间复杂度n的2次方汇总" class="article-share-link">Compartir</a>
       
       
       
@@ -334,7 +418,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" data-id="clcre6kai000wdgytf8pjan15" data-title="排序-插入排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/18/%E6%8E%92%E5%BA%8F-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" data-id="clcst9uw7000ypoyte447ce5i" data-title="排序-插入排序" class="article-share-link">Compartir</a>
       
       
       
@@ -379,7 +463,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" data-id="clcre6kan0014dgyt0uy56mzd" data-title="排序-选择排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" data-id="clcst9uwb0016poytb4xh5w1q" data-title="排序-选择排序" class="article-share-link">Compartir</a>
       
       
       
@@ -436,7 +520,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" data-id="clcre6kab000ldgytfr35b1q5" data-title="排序-冒泡排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/17/%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" data-id="clcst9uw1000opoyt1epy6qfr" data-title="排序-冒泡排序" class="article-share-link">Compartir</a>
       
       
       
@@ -483,7 +567,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/09/%E5%B0%B1%E6%98%AF%E7%8E%A9/" data-id="clcre6ka9000idgytbnt46c05" data-title="就是玩" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/09/%E5%B0%B1%E6%98%AF%E7%8E%A9/" data-id="clcst9uvy000kpoyte2x6avg6" data-title="就是玩" class="article-share-link">Compartir</a>
       
       
       
@@ -538,7 +622,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/08/%E5%93%88%E5%B8%8C%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="clcre6ka3000cdgyt7e13gyy0" data-title="哈希表中的算法" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/08/%E5%93%88%E5%B8%8C%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="clcst9uvq000dpoythb6hdkcy" data-title="哈希表中的算法" class="article-share-link">Compartir</a>
       
       
       
@@ -594,7 +678,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/08/LC%E9%A2%98%E8%A7%A3-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/" data-id="clcre6k9w0004dgyt3fub4zkz" data-title="LC题解-环形链表Ⅱ题解笔记" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/08/LC%E9%A2%98%E8%A7%A3-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%E2%85%A1%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/" data-id="clcst9uvl0004poytgm42cozw" data-title="LC题解-环形链表Ⅱ题解笔记" class="article-share-link">Compartir</a>
       
       
       
@@ -608,84 +692,11 @@
 
 
   
-    <article id="post-链表中的算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/11/07/%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" class="article-date">
-  <time class="dt-published" datetime="2022-11-07T11:12:03.000Z" itemprop="datePublished">2022-11-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/11/07/%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/">链表中的算法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h5 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h5><p>链表是通过指针串联起来的线性结构，每个节点由两部分组成，一个是数据域，一个是指针域，数据域存储数据，指针域储存指向下一节点的指针，最后一个节点指针域是null。</p>
-<h5 id="链表类型"><a href="#链表类型" class="headerlink" title="链表类型"></a>链表类型</h5><ul>
-<li><p>单链表</p>
-</li>
-<li><p>双链表，指针域包含两个指针，分别指向上一个节点的指针和指向下一个节点的指针</p>
-</li>
-<li><p>循环链表，最后一个节点的指针域指向起始位置</p>
-</li>
-</ul>
-<h5 id="链表存储方式"><a href="#链表存储方式" class="headerlink" title="链表存储方式"></a>链表存储方式</h5><ul>
-<li><p>数组</p>
-</li>
-<li><p>非数组</p>
-</li>
-</ul>
-<h4 id="链表的重要操作"><a href="#链表的重要操作" class="headerlink" title="链表的重要操作"></a>链表的重要操作</h4><ul>
-<li><p>删除节点，将指向删除节点的指针指向删除节点的下一个节点</p>
-</li>
-<li><p>添加节点</p>
-</li>
-</ul>
-<h5 id="链表操作的方式"><a href="#链表操作的方式" class="headerlink" title="链表操作的方式"></a>链表操作的方式</h5><ul>
-<li><p>直接使用原来的链表进行操作</p>
-</li>
-<li><p>设置虚拟头结点进行操作</p>
-</li>
-</ul>
-<h5 id="常用算法"><a href="#常用算法" class="headerlink" title="常用算法"></a>常用算法</h5><ul>
-<li><p>双指针</p>
-</li>
-<li><p>快慢指针</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/07/%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95/" data-id="clcre6kbn002wdgyt9wela9fw" data-title="链表中的算法" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">weiter &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; Previo</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Siguiente &raquo;</a>
   </nav>
 
 </section>
@@ -707,16 +718,16 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nube de Tags</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" style="font-size: 10px;">Java基础代码示例</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" style="font-size: 12.5px;">Java并发编程</a> <a href="/tags/KML/" style="font-size: 10px;">KML</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" style="font-size: 12.5px;">工具使用笔记</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 17.5px;">排序</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 10px;">源码阅读</a> <a href="/tags/%E7%9E%8E%E7%8E%A9/" style="font-size: 10px;">瞎玩</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 12.5px;">系统架构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">项目实践</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 15px;">题解</a>
+      <a href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" style="font-size: 10px;">Java基础代码示例</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" style="font-size: 12px;">Java并发编程</a> <a href="/tags/KML/" style="font-size: 10px;">KML</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" style="font-size: 12px;">工具使用笔记</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 18px;">排序</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 10px;">源码阅读</a> <a href="/tags/%E7%9E%8E%E7%8E%A9/" style="font-size: 10px;">瞎玩</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 12px;">系统架构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 14px;">设计模式</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">项目实践</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 16px;">题解</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archivos</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
     </div>
@@ -726,9 +737,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Posts recientes</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2023/01/11/LC%E9%A2%98%E8%A7%A3-%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2-KML%E7%AE%97%E6%B3%95/">LC题解-重复的子字符串-KML算法</a>
+          </li>
         
           <li>
             <a href="/2023/01/11/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%97%E6%B3%95-KML%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/">字符串算法-KML算法详解</a>
@@ -746,10 +761,6 @@
             <a href="/2022/12/02/JDK%E7%9A%84Arrays-sort%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">JDK的Arrays.sort源码阅读</a>
           </li>
         
-          <li>
-            <a href="/2022/11/25/%E6%8E%92%E5%BA%8F-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E6%A1%B6%E6%8E%92%E5%BA%8F/">排序-计数排序、基数排序、桶排序</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -764,7 +775,7 @@
     <div id="footer-info" class="inner">
       
       &copy; 2023 Avin Zhang<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+      Construido por <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

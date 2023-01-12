@@ -64,12 +64,12 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Buscar"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Buscar"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qwzhang01.github.io"></form>
       </div>
     </div>
   </div>
@@ -77,6 +77,53 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-LC题解-重复的子字符串-KML算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/11/LC%E9%A2%98%E8%A7%A3-%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2-KML%E7%AE%97%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2023-01-11T11:15:09.000Z" itemprop="datePublished">2023-01-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/01/11/LC%E9%A2%98%E8%A7%A3-%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2-KML%E7%AE%97%E6%B3%95/">LC题解-重复的子字符串-KML算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="/2023/01/11/LC%E9%A2%98%E8%A7%A3-%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2-KML%E7%AE%97%E6%B3%95/1.png"></p>
+<h4 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h4><ul>
+<li>KML算法，计算最长相当前后缀长度，字符串长度减最长相当前后缀长度即为最小的重复字符串，字符串长度余最小重复字符串长度为0则说明字符串为重复字符串</li>
+<li>将字符串相加，同时掐头去尾2个，如果新字符串包含原字符串，则说明字符串是重复字符串</li>
+</ul>
+<h4 id="KML-解题源码"><a href="#KML-解题源码" class="headerlink" title="KML 解题源码"></a>KML 解题源码</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public boolean repeatedSubstringPattern(String s) &#123;</span><br><span class="line">    if (s == null || s == &quot;&quot; || s.length() == 1) &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">    int[] next = getNext(s);</span><br><span class="line">    int preNextLen = next[next.length - 1];</span><br><span class="line">    return preNextLen &gt; 0 &amp;&amp; next.length % (next.length - preNextLen) == 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private int[] getNext(String s) &#123;</span><br><span class="line">    char[] sc = s.toCharArray();</span><br><span class="line">    int j = 0;</span><br><span class="line"></span><br><span class="line">    int[] next = new int[s.length()];</span><br><span class="line"></span><br><span class="line">    for (int i = 1; i &lt; sc.length; i++) &#123;</span><br><span class="line">        while (j &gt; 0 &amp;&amp; sc[j] != sc[i]) &#123;</span><br><span class="line">            j = next[j - 1];</span><br><span class="line">        &#125;</span><br><span class="line">        if (sc[j] == sc[i]) &#123;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        next[i] = j;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="相加解题源码"><a href="#相加解题源码" class="headerlink" title="相加解题源码"></a>相加解题源码</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public boolean repeatedSubstringPattern(String s) &#123;</span><br><span class="line">    if(s == null || s.length() &lt; 2) &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">    String ns = s + s;</span><br><span class="line">    return strStr(ns.substring(1, ns.length() - 1), s) &gt;= 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private int strStr(String ns, String s) &#123;</span><br><span class="line">    int[] next = getNext(s);</span><br><span class="line"></span><br><span class="line">    char[] nsc = ns.toCharArray();</span><br><span class="line">    char[] sc = s.toCharArray();</span><br><span class="line"></span><br><span class="line">    int j = 0;</span><br><span class="line"></span><br><span class="line">    for(int i = 0; i &lt; nsc.length; i++) &#123;</span><br><span class="line">        while(j &gt; 0 &amp;&amp; nsc[i] != sc[j]) &#123;</span><br><span class="line">            j = next[j - 1];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if(nsc[i] == sc[j]) &#123;</span><br><span class="line">            j++;</span><br><span class="line">            if(j == sc.length)&#123;</span><br><span class="line">                return i - (j - 1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private int[] getNext(String s) &#123;</span><br><span class="line">    int[] next = new int[s.length()];</span><br><span class="line"></span><br><span class="line">    int j = 0;</span><br><span class="line">    char[] cs = s.toCharArray();</span><br><span class="line">    for(int i = 1; i &lt; s.length(); i++) &#123;</span><br><span class="line">        while(j &gt; 0 &amp;&amp; cs[i] != cs[j]) &#123;</span><br><span class="line">            j = next[j - 1];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if(cs[j] == cs[i]) &#123;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        next[i] = j;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qwzhang01.github.io/2023/01/11/LC%E9%A2%98%E8%A7%A3-%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2-KML%E7%AE%97%E6%B3%95/" data-id="clcst9uvm0005poythue1ana2" data-title="LC题解-重复的子字符串-KML算法" class="article-share-link">Compartir</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-字符串算法-KML算法详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
@@ -123,7 +170,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2023/01/11/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%97%E6%B3%95-KML%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/" data-id="clcre6ka7000gdgyt4f4udrox" data-title="字符串算法-KML算法详解" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2023/01/11/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%97%E6%B3%95-KML%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/" data-id="clcst9uvu000fpoyt03iq9ww9" data-title="字符串算法-KML算法详解" class="article-share-link">Compartir</a>
       
       
       
@@ -244,7 +291,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/12/09/SpringBoot%E4%B8%8EMybatis%E4%B8%8B%E5%AD%97%E6%AE%B5%E8%84%B1%E6%95%8F%E3%80%81%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E9%9D%9E%E4%BE%B5%E5%85%A5%E6%80%A7%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/" data-id="clcre6kbq0032dgyt10g3g8xr" data-title="SpringBoot与Mybatis下字段脱敏、加密解密非侵入性实现方式" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/12/09/SpringBoot%E4%B8%8EMybatis%E4%B8%8B%E5%AD%97%E6%AE%B5%E8%84%B1%E6%95%8F%E3%80%81%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E9%9D%9E%E4%BE%B5%E5%85%A5%E6%80%A7%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/" data-id="clcst9ux50037poyt8kyp7tsy" data-title="SpringBoot与Mybatis下字段脱敏、加密解密非侵入性实现方式" class="article-share-link">Compartir</a>
       
       
       
@@ -294,7 +341,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/12/02/LC%E9%A2%98%E8%A7%A3-%E5%B7%A6%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-id="clcre6k9r0001dgyt2shmecxy" data-title="LC题解-左旋转字符串" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/12/02/LC%E9%A2%98%E8%A7%A3-%E5%B7%A6%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-id="clcst9uvj0003poytbjjbhkzc" data-title="LC题解-左旋转字符串" class="article-share-link">Compartir</a>
       
       
       
@@ -373,7 +420,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/12/02/JDK%E7%9A%84Arrays-sort%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" data-id="clcre6kbp0030dgytevhvbqhl" data-title="JDK的Arrays.sort源码阅读" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/12/02/JDK%E7%9A%84Arrays-sort%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" data-id="clcst9ux40035poytc0vu09nd" data-title="JDK的Arrays.sort源码阅读" class="article-share-link">Compartir</a>
       
       
       
@@ -465,7 +512,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/25/%E6%8E%92%E5%BA%8F-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E6%A1%B6%E6%8E%92%E5%BA%8F/" data-id="clcre6kal0011dgytg41cc7tl" data-title="排序-计数排序、基数排序、桶排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/25/%E6%8E%92%E5%BA%8F-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E6%A1%B6%E6%8E%92%E5%BA%8F/" data-id="clcst9uwa0014poytbcqhdj4r" data-title="排序-计数排序、基数排序、桶排序" class="article-share-link">Compartir</a>
       
       
       
@@ -544,7 +591,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/25/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6O%EF%BC%88nlongn%EF%BC%89%E6%B1%87%E6%80%BB/" data-id="clcre6kak000ydgyt0c6e38pc" data-title="排序-时间复杂度O（nlongn）汇总" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/25/%E6%8E%92%E5%BA%8F-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6O%EF%BC%88nlongn%EF%BC%89%E6%B1%87%E6%80%BB/" data-id="clcst9uw80011poyt2mtw4dp7" data-title="排序-时间复杂度O（nlongn）汇总" class="article-share-link">Compartir</a>
       
       
       
@@ -604,7 +651,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/24/%E6%8E%92%E5%BA%8F-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" data-id="clcre6kag000udgytan7jbn3w" data-title="排序-归并排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/24/%E6%8E%92%E5%BA%8F-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" data-id="clcst9uw5000upoyt6wz5c4k2" data-title="排序-归并排序" class="article-share-link">Compartir</a>
       
       
       
@@ -654,7 +701,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/23/LC%E9%A2%98%E8%A7%A3-%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0%E9%A2%98%E8%A7%A3-%E6%91%A9%E5%B0%94%E6%8A%95%E7%A5%A8%E6%B3%95/" data-id="clcre6k9v0003dgyt31s94snm" data-title="LC题解-多数元素题解-摩尔投票法" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/23/LC%E9%A2%98%E8%A7%A3-%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0%E9%A2%98%E8%A7%A3-%E6%91%A9%E5%B0%94%E6%8A%95%E7%A5%A8%E6%B3%95/" data-id="clcst9uvf0001poyt5ypcftjn" data-title="LC题解-多数元素题解-摩尔投票法" class="article-share-link">Compartir</a>
       
       
       
@@ -733,91 +780,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%BF%AB%E6%8E%92/" data-id="clcre6kag000tdgyt4oed3sfe" data-title="排序-快排" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-排序-堆排序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%A0%86%E6%8E%92%E5%BA%8F/" class="article-date">
-  <time class="dt-published" datetime="2022-11-22T06:27:11.000Z" itemprop="datePublished">2022-11-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%A0%86%E6%8E%92%E5%BA%8F/">排序-堆排序</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>    完全二叉树是叶子节点只能出现在最下层和次下层，且最下层的叶子节点集中在树的左部。</p>
-<p>    堆是有如下特点的完全二叉树</p>
-<ul>
-<li><p>根节点的值&gt;&#x3D;子节点的值，即大顶堆</p>
-</li>
-<li><p>根节点的值&lt;&#x3D;子节点的值，即小顶堆</p>
-</li>
-</ul>
-<p>    </p>
-<h5 id="构建大顶堆"><a href="#构建大顶堆" class="headerlink" title="构建大顶堆"></a>构建大顶堆</h5><ul>
-<li><p>从0开始，将每一个数字依次插入，一边插入一边调整堆的结构，使之满足大顶堆的要求</p>
-</li>
-<li><p>将整个数列试作完全二叉树，自底向上调整树的结构，使之满足大顶堆的要求</p>
-</li>
-</ul>
-<h5 id="建堆与堆化"><a href="#建堆与堆化" class="headerlink" title="建堆与堆化"></a>建堆与堆化</h5><ul>
-<li><p>建堆即构建堆</p>
-</li>
-<li><p>堆化是从当前位置开始调整数组使之满足堆的特征</p>
-</li>
-</ul>
-<h5 id="堆排序的过程"><a href="#堆排序的过程" class="headerlink" title="堆排序的过程"></a>堆排序的过程</h5><ul>
-<li><p>构建大顶堆</p>
-</li>
-<li><p>取出堆顶元素</p>
-</li>
-<li><p>调整剩余数字使之符合大顶堆特点</p>
-</li>
-<li><p>再次取出堆顶元素</p>
-</li>
-<li><p>循环往复</p>
-</li>
-</ul>
-<h5 id="完全二叉树的性质-根节点下标为0"><a href="#完全二叉树的性质-根节点下标为0" class="headerlink" title="完全二叉树的性质(根节点下标为0)"></a>完全二叉树的性质(根节点下标为0)</h5><ul>
-<li><p>下标i的左子节点下标：2 * i + 1</p>
-</li>
-<li><p>下表i的右子节点下标：左下标+1</p>
-</li>
-<li><p>最后一个非叶子节点下标：n&#x2F;2-1</p>
-</li>
-</ul>
-<h4 id="堆排序的复杂度分析"><a href="#堆排序的复杂度分析" class="headerlink" title="堆排序的复杂度分析"></a>堆排序的复杂度分析</h4><p>    堆排序的时间复杂度为O(n log n)，堆排序的空间复杂度为 O(1)。</p>
-<p>    时间复杂度分析由建堆和堆化两个，其中建堆的时间复杂度是O(n)，堆化的时间复杂度是O(n log n)</p>
-<h5 id="堆排序代码"><a href="#堆排序代码" class="headerlink" title="堆排序代码"></a>堆排序代码</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testHeapSort</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] arr = <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">6</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">4</span>&#125;;</span><br><span class="line">    buildMaxHeap(arr);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> arr.length - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        swap(arr, <span class="number">0</span>, i);</span><br><span class="line">        maxHeapify(arr, <span class="number">0</span>, i);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 构建大顶堆</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 我要成为亿万富翁</span></span><br><span class="line"><span class="comment"> * 我要财务自由</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">buildMaxHeap</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> arr.length / <span class="number">2</span> - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        maxHeapify(arr, i, arr.length);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 堆化</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 我要成为亿万富翁</span></span><br><span class="line"><span class="comment"> * 我要财务自由</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> i</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> size</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">maxHeapify</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> i, <span class="type">int</span> size)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">2</span> * i + <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> left + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">maxValue</span> <span class="operator">=</span> i;</span><br><span class="line">    <span class="keyword">if</span> (left &lt; size &amp;&amp; arr[left] &gt; arr[maxValue]) &#123;</span><br><span class="line">        maxValue = left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (right &lt; size &amp;&amp; arr[right] &gt; arr[maxValue]) &#123;</span><br><span class="line">        maxValue = right;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (maxValue != i) &#123;</span><br><span class="line">        swap(arr, i, maxValue);</span><br><span class="line">        maxHeapify(arr, maxValue, size);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 交换数组arr 下标 i j  的数据</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 我要成为亿万富翁</span></span><br><span class="line"><span class="comment"> * 我要财务自由</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> i</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> j</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> i, <span class="type">int</span> j)</span> &#123;</span><br><span class="line">    arr[i] = arr[i] ^ arr[j];</span><br><span class="line">    arr[j] = arr[j] ^ arr[i];</span><br><span class="line">    arr[i] = arr[i] ^ arr[j];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%A0%86%E6%8E%92%E5%BA%8F/" data-id="clcre6kad000odgyt77aab2xc" data-title="排序-堆排序" class="article-share-link">Teilen</a>
+      <a data-url="https://qwzhang01.github.io/2022/11/22/%E6%8E%92%E5%BA%8F-%E5%BF%AB%E6%8E%92/" data-id="clcst9uw6000wpoytgnk7bjpb" data-title="排序-快排" class="article-share-link">Compartir</a>
       
       
       
@@ -835,7 +798,7 @@
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">weiter &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Siguiente &raquo;</a>
   </nav>
 
 </section>
@@ -857,16 +820,16 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nube de Tags</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" style="font-size: 10px;">Java基础代码示例</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" style="font-size: 12.5px;">Java并发编程</a> <a href="/tags/KML/" style="font-size: 10px;">KML</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" style="font-size: 12.5px;">工具使用笔记</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 17.5px;">排序</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 10px;">源码阅读</a> <a href="/tags/%E7%9E%8E%E7%8E%A9/" style="font-size: 10px;">瞎玩</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 12.5px;">系统架构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">项目实践</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 15px;">题解</a>
+      <a href="/tags/Java%E5%9F%BA%E7%A1%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/" style="font-size: 10px;">Java基础代码示例</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" style="font-size: 12px;">Java并发编程</a> <a href="/tags/KML/" style="font-size: 10px;">KML</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" style="font-size: 12px;">工具使用笔记</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 18px;">排序</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 10px;">源码阅读</a> <a href="/tags/%E7%9E%8E%E7%8E%A9/" style="font-size: 10px;">瞎玩</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 12px;">系统架构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 14px;">设计模式</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">项目实践</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 16px;">题解</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archivos</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
     </div>
@@ -876,9 +839,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Posts recientes</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2023/01/11/LC%E9%A2%98%E8%A7%A3-%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2-KML%E7%AE%97%E6%B3%95/">LC题解-重复的子字符串-KML算法</a>
+          </li>
         
           <li>
             <a href="/2023/01/11/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%97%E6%B3%95-KML%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/">字符串算法-KML算法详解</a>
@@ -896,10 +863,6 @@
             <a href="/2022/12/02/JDK%E7%9A%84Arrays-sort%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">JDK的Arrays.sort源码阅读</a>
           </li>
         
-          <li>
-            <a href="/2022/11/25/%E6%8E%92%E5%BA%8F-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E6%A1%B6%E6%8E%92%E5%BA%8F/">排序-计数排序、基数排序、桶排序</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -914,7 +877,7 @@
     <div id="footer-info" class="inner">
       
       &copy; 2023 Avin Zhang<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+      Construido por <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
